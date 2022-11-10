@@ -9,10 +9,15 @@ export const authStart = () => {
     };
 };
 
-export const authSuccess = (authData) => {
+export const authSuccess = (
+                    idToken,
+                    localId,
+                    refreshToken) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
-        authData: authData
+        idToken: idToken,
+        localId: localId,
+        refreshToken: refreshToken
     };
 };
 
@@ -46,7 +51,9 @@ export const authenticate = (
         .then(res => {
             console.log(res);
             signUpResData = res.data;
-            dispatch(authSuccess(res.data));
+            dispatch(authSuccess(res.data.idToken,
+                            res.data.localId,
+                            res.data.refreshToken));
         })
         .catch(err => {
             console.log(err);
