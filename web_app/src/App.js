@@ -1,17 +1,23 @@
 import './App.css';
-import React, { useState } from 'react';
+import React from 'react';
+import { Routes, Route } from 'react-router';
+
 import Landing from './components/Landing/Landing';
+import Auth from './components/Auth/Auth';
 
 const App = props => {
-  const [authenticated, setAuthenticated] = useState(false);
+  let content =  (
+    <Routes>
+      <Route path='/' element={<Landing />} />
+      <Route path='/signin' element={<Auth />} />
+    </Routes>
+  );
 
-  let content =  <Landing />
-
-  if (authenticated) {
-
-  }
-
-  return content;
+  return (
+    <div>
+      {content}
+    </div>
+  );
 }
 
 export default App;

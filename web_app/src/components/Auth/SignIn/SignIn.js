@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import classes from './SignUp.module.css';
+import classes from './SignIn.module.css';
 
 //redux import actions from auth action creator
 import * as actions from '../../../store/actions/index';
 import { connect } from "react-redux";
 
-const SignUp = (props) => {
+const SignIn = (props) => {
     // const [enteredUsername, setUsername] = useState('Username');
     const [enteredEmail, setEmail] = useState('Email');
     const [enteredPassword, setPassword] = useState('');
@@ -15,7 +15,7 @@ const SignUp = (props) => {
             // enteredUsername,
             enteredEmail,
             enteredPassword,
-            true);
+            false);
     }
 
     const setEnteredValue = (event, setState) => {
@@ -24,7 +24,7 @@ const SignUp = (props) => {
 
     return (
         <div>
-            <p>Sign Up</p>
+            <p>Sign In</p>
             <form onSubmit={submitHandler}>
                 {/* <div className={classes.FormControl}>
                     <label htmlFor="username">Enter a username</label>
@@ -37,17 +37,18 @@ const SignUp = (props) => {
                     onChange={event => setEnteredValue(event, setEmail)} />
                 </div>
                 <div className={classes.FormControl}>
-                    <label htmlFor="password">Enter a unique password</label>
+                    <label htmlFor="password">Enter your password</label>
                     <input type="password" id="password" value={enteredPassword}
                     onChange={event => setEnteredValue(event, setPassword)} />
                 </div>
                 <div className={classes.FormActions}>
-                    <button type="submit">Sign Up</button>
+                    <button type="submit">SignIn</button>
                 </div>
             </form>
         </div>
     );
 };
+
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -63,4 +64,4 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(null, mapDispatchToProps)(SignUp);
+export default connect(null, mapDispatchToProps)(SignIn);
