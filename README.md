@@ -1,2 +1,2 @@
-# justsentences
+# jstsentences
  

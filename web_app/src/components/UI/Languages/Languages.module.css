@@ -1,0 +1,19 @@
+.Main {
+    background-color: red;
+}
+
+.Box {
+    background-color: green;
+    height: 100px;
+    width: 100px;
+}
+
+.Stretch {
+    background-color: blue;
+    height: 50px;
+    width: 500px;
+}
+
+.Stretch div {
+    display: inline;
+}
