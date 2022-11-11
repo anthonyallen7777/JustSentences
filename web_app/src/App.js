@@ -2,9 +2,6 @@ import './App.css';
 import React, { Suspense, useEffect, useContext, useState } from 'react';
 import { Routes, Route } from 'react-router';
 import { Navigate } from 'react-router-dom';
-
-import useConstructor from './hooks/constructor-hook';
-
 //redux
 import { connect } from 'react-redux';
 import * as actions from './store/actions/index';

@@ -7,8 +7,8 @@ const initState = {
     refreshToken: null,
     error: null,
     loading: false,
-    shouldWeShowVerifyBanner: false,
-    firstTimeSigningUp: false
+    shouldWeShowVerifyBanner: null,
+    firstTimeSigningUp: null
 }
 
 const authStart = (state) => {
@@ -24,9 +24,7 @@ const authSuccess = (state, action) => {
         localId: action.localId,
         refreshToken: action.refreshToken,
         error: null,
-        loading: false,
-        shouldWeShowVerifyBanner: action.shouldWeShowVerifyBanner,
-        firstTimeSigningUp: action.firstTimeSigningUp
+        loading: false
     });
 };
 
@@ -41,12 +39,20 @@ const authFail = (state, action) => {
     });
 };
 
+const checkVerify = (state, action) => {
+    return updateObject(state, {
+        shouldWeShowVerifyBanner: action.shouldWeShowVerifyBanner,
+        firstTimeSigningUp: action.firstTimeSigningUp
+    });
+}
+
 const reducer = (state = initState, action) => {
     switch(action.type) {
         case actionTypes.AUTH_START: return authStart(state, action);
         case actionTypes.AUTH_SUCCESS: return authSuccess(state, action);
         case actionTypes.AUTH_FAIL: return authFail(state, action);
         case actionTypes.AUTH_LOGOUT: return authLogout(state, action);
+        case actionTypes.CHECK_VERIFY: return checkVerify(state, action);
         default:
             return state;
     }

@@ -6,13 +6,13 @@ import * as actions from '../../../store/actions/index';
 import { connect } from "react-redux";
 
 const SignUp = (props) => {
-    // const [enteredUsername, setUsername] = useState('Username');
+    const [enteredUsername, setUsername] = useState('Username');
     const [enteredEmail, setEmail] = useState('Email');
     const [enteredPassword, setPassword] = useState('');
     const submitHandler = event => {
         event.preventDefault();
         props.onAuthenticate(
-            // enteredUsername,
+            enteredUsername,
             enteredEmail,
             enteredPassword,
             true);
@@ -26,11 +26,11 @@ const SignUp = (props) => {
         <div>
             <p>Sign Up</p>
             <form onSubmit={submitHandler}>
-                {/* <div className={classes.FormControl}>
+                <div className={classes.FormControl}>
                     <label htmlFor="username">Enter a username</label>
                     <input type="text" id="username" value={enteredUsername}
                     onChange={event => setEnteredValue(event, setUsername)} />
-                </div> */}
+                </div>
                 <div className={classes.FormControl}>
                     <label htmlFor="email">Enter your Email</label>
                     <input type="email" id="email" value={enteredEmail}
@@ -52,11 +52,11 @@ const SignUp = (props) => {
 const mapDispatchToProps = dispatch => {
     return {
         onAuthenticate: (
-            // username,
+            username,
             email,
             password,
             signingUp) => dispatch(actions.authenticate(
-                                                // username,
+                                                username,
                                                 email,
                                                 password,
                                                 signingUp))
