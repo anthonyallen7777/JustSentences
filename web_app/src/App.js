@@ -33,7 +33,6 @@ const App = props => {
     content =  (
       <Routes>
         <Route path='/signin' element={<Auth />} />
-        {/* <Route index element={<Landing />} /> */}
         <Route path='/' exact element={<Landing />} />
         <Route path="/*" element={<Navigate to="/"/>} />
       </Routes>
@@ -42,8 +41,8 @@ const App = props => {
     if (props.isLoggedIn) {
       content =  (
         <Routes>
-          <Route path='/base' exact element={<Base />} />
-          <Route path='/*' element={<Navigate to='/base'/>} />
+          <Route path='/' exact element={<Base />} />
+          <Route path='/*' element={<Navigate to='/'/>} />
         </Routes>
       );
     }

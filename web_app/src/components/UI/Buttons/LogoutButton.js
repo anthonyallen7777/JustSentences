@@ -1,12 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classes from './LogoutButton.module.css';
 
-const LogoutButton = (props) => {
-    return (
-        <div className={classes.LogoutButton}>
+import { Navigate, useNavigate } from "react-router-dom";
 
-        </div>
+//redux
+import * as actions from '../../../store/actions/index';
+import { connect } from "react-redux";
+
+const LogoutButton = (props) => {
+    const {onLogout} = props;
+    const navigate = useNavigate();
+    const logoutHandler = () => {
+        onLogout();
+        navigate(0);
+        console.log("LOGGING OUT");
+    }
+
+    return (
+        <React.Fragment>
+            <div className={classes.LogoutButton} onClick={logoutHandler}>
+            </div>
+        </React.Fragment>
     );
 };
 
-export default func;
+const mapDispatchToProps = dispatch => {
+    return {
+      onLogout: () => dispatch(actions.logout())
+    };
+  };
+
+export default connect(null, mapDispatchToProps)(LogoutButton);

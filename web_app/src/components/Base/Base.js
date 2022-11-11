@@ -1,5 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
+import LogoutButton from '../UI/Buttons/LogoutButton';
 
 const Base = () => {
     // const search = useLocation().search;
@@ -8,6 +9,7 @@ const Base = () => {
     return (
         <div>
             <h1>Base</h1>
+            <LogoutButton />
         </div>
     );
 };
