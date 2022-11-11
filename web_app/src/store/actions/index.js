@@ -1,3 +1,4 @@
 export {
-    authenticate
+    authenticate,
+    authStateCheck
 } from './auth';

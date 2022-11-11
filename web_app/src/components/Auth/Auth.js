@@ -1,14 +1,53 @@
 import React from "react";
+import classes from './Auth.module.css';
+
 import SignIn from "./SignIn/SignIn";
 import SignUp from "./SignUp/SignUp";
+import Spinner from '../UI/Spinner/Spinner';
+
+import { Navigate } from "react-router";
+
+//redux
+import { connect } from "react-redux";
 
 const Auth = (props) => {
-    return (
-        <div>
+    let forms = (
+        <React.Fragment>
             <SignIn />
             <SignUp />
+        </React.Fragment>
+    );
+
+    if (props.loading) {
+        forms = <Spinner />
+    }
+
+    let errMessage = null;
+    if (props.error) {
+        errMessage = <p>{props.error.message}</p>;
+    }
+
+    let authRedirect = null;
+    if (props.isAuthenticated) {
+        authRedirect = <Navigate to="/" state={{signingUp: props.signingUp}} />
+    }
+
+    return (
+        <div className={classes.FormsContainer}>
+            {authRedirect}
+            {errMessage}
+            {forms}
         </div>
     );
 };
 
-export default Auth;
+const mapStateToProps = state => {
+    return {
+        signingUp: state.authenticate.signingUp,
+        isAuthenticated: state.authenticate.idToken !== null,
+        loading: state.authenticate.loading,
+        error: state.authenticate.error,
+    }
+}
+
+export default connect(mapStateToProps)(Auth);
