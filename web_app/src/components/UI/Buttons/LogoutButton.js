@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import classes from './LogoutButton.module.css';
 
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 //redux
 import * as actions from '../../../store/actions/index';

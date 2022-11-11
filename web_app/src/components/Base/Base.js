@@ -8,7 +8,10 @@ const Base = () => {
     // console.log(verifyCode);
     return (
         <div>
-            <h1>Base</h1>
+            <h2>Practice</h2>
+            <h2>Progress</h2>
+            <h2>Languages</h2>
+            <h2>Profile</h2>
             <LogoutButton />
         </div>
     );
