@@ -7,7 +7,8 @@ const initState = {
     refreshToken: null,
     error: null,
     loading: false,
-    shouldWeShowVerifyBanner: false
+    shouldWeShowVerifyBanner: false,
+    firstTimeSigningUp: false
 }
 
 const authStart = (state) => {
@@ -24,7 +25,8 @@ const authSuccess = (state, action) => {
         refreshToken: action.refreshToken,
         error: null,
         loading: false,
-        shouldWeShowVerifyBanner: action.shouldWeShowVerifyBanner
+        shouldWeShowVerifyBanner: action.shouldWeShowVerifyBanner,
+        firstTimeSigningUp: action.firstTimeSigningUp
     });
 };
 

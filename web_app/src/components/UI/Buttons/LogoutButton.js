@@ -13,7 +13,6 @@ const LogoutButton = (props) => {
     const logoutHandler = () => {
         onLogout();
         navigate(0);
-        console.log("LOGGING OUT");
     }
 
     return (

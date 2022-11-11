@@ -6,9 +6,6 @@ import SectionThree from "./SectionThree/SectionThree";
 import SectionFour from "./SectionFour/SectionFour";
 
 const Landing = () => {
-    useEffect(()=>{
-        console.log('[Landing ComponentDidMount]');
-    }, []);
     return (
         <div>
             <Header />

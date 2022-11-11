@@ -13,13 +13,15 @@ export const authSuccess = (
                     idToken,
                     localId,
                     refreshToken,
-                    shouldWeShowVerifyBanner) => {
+                    shouldWeShowVerifyBanner,
+                    firstTimeSigningUp) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
         idToken: idToken,
         localId: localId,
         refreshToken: refreshToken,
-        shouldWeShowVerifyBanner: shouldWeShowVerifyBanner
+        shouldWeShowVerifyBanner: shouldWeShowVerifyBanner,
+        firstTimeSigningUp: firstTimeSigningUp
     };
 };
 
@@ -85,12 +87,42 @@ export const authenticate = (
 
         //SIGN IN
         if (!signingUp) {
-            console.log("SIGNING IN");
             url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + APT_CvkWER;
 
-            //sign the user up or in
             setTimeout(() => {
-                signUpOrSignIn(dispatch, url, postData, shouldWeShowVerifyBanner)
+                // let signInData = null;
+                axios.post(url, postData)
+                .then(res => {
+                    // console.log(res);
+                    // res.data = signInData;
+                    return res.data;
+                })
+                //check if the users email is verified
+                .then(resData => {
+                    url = 'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=' + APT_CvkWER;
+                    axios.post(url, 
+                        {
+                            "idToken": resData.idToken
+                        }
+                    )
+                    .then(userAccountInfoRes => {
+                        shouldWeShowVerifyBanner = userAccountInfoRes.data.users[0].emailVerified;
+                        const expireDate = new Date(new Date().getTime() + (resData.expiresIn * 1000))
+                        localStorage.setItem('idToken', resData.idToken);
+                        localStorage.setItem('localId', resData.localId);
+                        localStorage.setItem('expireDate', expireDate);
+                        
+                        dispatch(authTimeoutCheck(resData.expiresIn));
+                        dispatch(authSuccess(resData.idToken,
+                            resData.localId,
+                            resData.refreshToken,
+                            !shouldWeShowVerifyBanner,
+                            false));
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
+                })
                 .catch(err => {
                     console.log(err);
                     dispatch(authFail(err.response.data.error));
@@ -100,7 +132,21 @@ export const authenticate = (
         //SIGN UP
         else {
             setTimeout(() => {
-                signUpOrSignIn(dispatch, url, postData, shouldWeShowVerifyBanner)
+                axios.post(url, postData)
+                .then(res => {
+                    console.log(res);
+                    const expireDate = new Date(new Date().getTime() + (res.data.expiresIn * 1000))
+                    localStorage.setItem('idToken', res.data.idToken);
+                    localStorage.setItem('localId', res.data.localId);
+                    localStorage.setItem('expireDate', expireDate);
+                    dispatch(authSuccess(res.data.idToken,
+                                    res.data.localId,
+                                    res.data.refreshToken,
+                                    shouldWeShowVerifyBanner,
+                                    true));
+                    dispatch(authTimeoutCheck(res.data.expiresIn));
+                    return res.data;
+                })
                 //only send verification email if
                 //1. This is the first time the user is sign up
                 //2. The user is not new but they haven't verified yet
@@ -111,8 +157,8 @@ export const authenticate = (
                             "requestType": "VERIFY_EMAIL", "idToken": resData.idToken
                         }
                     )
-                    .then(verificationRes => {
-                        console.log(verificationRes);
+                    .then(VerifySendToEmailRes => {
+                        console.log(VerifySendToEmailRes);
                     })
                     .catch(err => {
                         console.log(err);
@@ -126,21 +172,4 @@ export const authenticate = (
         }
         
     }
-}
-
-const signUpOrSignIn = (dispatch, url, postData, shouldVerify) => {
-    return axios.post(url, postData)
-    .then(res => {
-        console.log(res);
-        const expireDate = new Date(new Date().getTime() + (res.data.expiresIn * 1000))
-        localStorage.setItem('idToken', res.data.idToken);
-        localStorage.setItem('localId', res.data.localId);
-        localStorage.setItem('expireDate', expireDate);
-        dispatch(authSuccess(res.data.idToken,
-                        res.data.localId,
-                        res.data.refreshToken,
-                        shouldVerify));
-        dispatch(authTimeoutCheck(res.data.expiresIn));
-        return res.data;
-    });
 }
