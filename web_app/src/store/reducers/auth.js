@@ -7,6 +7,7 @@ const initState = {
     refreshToken: null,
     error: null,
     loading: false,
+    shouldWeShowVerifyBanner: false
 }
 
 const authStart = (state) => {
@@ -22,7 +23,8 @@ const authSuccess = (state, action) => {
         localId: action.localId,
         refreshToken: action.refreshToken,
         error: null,
-        loading: false
+        loading: false,
+        shouldWeShowVerifyBanner: action.shouldWeShowVerifyBanner
     });
 };
 

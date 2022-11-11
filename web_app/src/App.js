@@ -19,17 +19,15 @@ const Profile = React.lazy(() => import('./components/Base/Profile/Profile'));
 const Settings = React.lazy(() => import('./components/Base/Profile/Settings/Settings'));
 
 const App = props => {
-  useConstructor(() => {
-    console.log("[App Component Before Mount]");
-  });
+  // useConstructor(() => {
+  //   console.log("[App Component Before Mount]");
+  // });
   const [loading, setLoading] = useState(true);
-
   //decontruct action so we can check if it changes
   const {onAutoSignIn} = props;
-  //componentDidMount
   useEffect(() => {
       onAutoSignIn();
-      console.log('[APP ComponentDidMount');
+      // console.log('[APP ComponentDidMount]');
       setLoading(false);
   }, [onAutoSignIn]);
 

@@ -12,12 +12,14 @@ export const authStart = () => {
 export const authSuccess = (
                     idToken,
                     localId,
-                    refreshToken) => {
+                    refreshToken,
+                    shouldWeShowVerifyBanner) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
         idToken: idToken,
         localId: localId,
-        refreshToken: refreshToken
+        refreshToken: refreshToken,
+        shouldWeShowVerifyBanner: shouldWeShowVerifyBanner
     };
 };
 
@@ -77,48 +79,68 @@ export const authenticate = (
             password: password,
             "returnSecureToken": true
         }
+        let shouldWeShowVerifyBanner = signingUp;
         //change the api url based upon what form the user submitted from
         let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + APT_CvkWER;
+
+        //SIGN IN
         if (!signingUp) {
             console.log("SIGNING IN");
             url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + APT_CvkWER;
+
+            //sign the user up or in
+            setTimeout(() => {
+                signUpOrSignIn(dispatch, url, postData, shouldWeShowVerifyBanner)
+                .catch(err => {
+                    console.log(err);
+                    dispatch(authFail(err.response.data.error));
+                });
+            }, 1000);
         }
-        //sign the user up or in
-        setTimeout(() => {
-            axios.post(url, postData)
-            .then(res => {
-                console.log(res);
-                const expireDate = new Date(new Date().getTime() + (res.data.expiresIn * 1000))
-                console.log(expireDate);
-                localStorage.setItem('idToken', res.data.idToken);
-                localStorage.setItem('localId', res.data.localId);
-                localStorage.setItem('expireDate', expireDate);
-                dispatch(authSuccess(res.data.idToken,
-                                res.data.localId,
-                                res.data.refreshToken));
-                //firebase default expiration time is 1hr
-                dispatch(authTimeoutCheck(res.data.expiresIn));
-                return res.data;
-            })
-            .then(resData => {
-                url = 'https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=' + APT_CvkWER;
-                axios.post(url, 
-                    {
-                        "requestType": "VERIFY_EMAIL", "idToken": resData.idToken
-                    }
-                )
-                .then(verificationRes => {
-                    console.log(verificationRes);
+        //SIGN UP
+        else {
+            setTimeout(() => {
+                signUpOrSignIn(dispatch, url, postData, shouldWeShowVerifyBanner)
+                //only send verification email if
+                //1. This is the first time the user is sign up
+                //2. The user is not new but they haven't verified yet
+                .then(resData => {
+                    url = 'https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=' + APT_CvkWER;
+                    axios.post(url, 
+                        {
+                            "requestType": "VERIFY_EMAIL", "idToken": resData.idToken
+                        }
+                    )
+                    .then(verificationRes => {
+                        console.log(verificationRes);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
                 })
                 .catch(err => {
                     console.log(err);
+                    dispatch(authFail(err.response.data.error));
                 });
-            })
-            .catch(err => {
-                console.log(err);
-                dispatch(authFail(err.response.data.error));
-            });
-        }, 1000);
+            }, 1000);
+        }
         
     }
+}
+
+const signUpOrSignIn = (dispatch, url, postData, shouldVerify) => {
+    return axios.post(url, postData)
+    .then(res => {
+        console.log(res);
+        const expireDate = new Date(new Date().getTime() + (res.data.expiresIn * 1000))
+        localStorage.setItem('idToken', res.data.idToken);
+        localStorage.setItem('localId', res.data.localId);
+        localStorage.setItem('expireDate', expireDate);
+        dispatch(authSuccess(res.data.idToken,
+                        res.data.localId,
+                        res.data.refreshToken,
+                        shouldVerify));
+        dispatch(authTimeoutCheck(res.data.expiresIn));
+        return res.data;
+    });
 }
