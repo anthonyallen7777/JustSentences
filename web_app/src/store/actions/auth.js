@@ -37,11 +37,12 @@ export const logout = () => {
     }
 }
 
-export const authTimeoutCheck = () => {
+export const authTimeoutCheck = (expireDate) => {
     return dispatch => {
+        //logout after expiration date is reached
         setTimeout(() => {
             dispatch(logout());
-        }, 3600 * 1000);
+        }, expireDate * 1000);
     }
 };
 
@@ -51,13 +52,12 @@ export const authStateCheck = () => {
         if (!idToken) {dispatch(logout());}
         else {
             const expireDate = new Date(localStorage.getItem('expireDate'));
-            if (expireDate > new Date()) {
-                console.log("TEST111");
+            if (expireDate <= new Date()) {
+                dispatch(logout());
+            } else {
                 const localId = localStorage.getItem('localId');
                 dispatch(authSuccess(idToken, localId));
-                dispatch(authTimeoutCheck(expireDate.getSeconds()-new Date().getSeconds()));
-            } else {
-                console.log("TEST2222");
+                dispatch(authTimeoutCheck((expireDate.getTime() - new Date().getTime())/ 1000));
             }
         }
     }
@@ -74,7 +74,8 @@ export const authenticate = (
         const postData = {
             // username: username,
             email: email,
-            password: password
+            password: password,
+            "returnSecureToken": true
         }
         //change the api url based upon what form the user submitted from
         let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + APT_CvkWER;
@@ -87,17 +88,16 @@ export const authenticate = (
             axios.post(url, postData)
             .then(res => {
                 console.log(res);
-                const expireDate = new Date(new Date().getTime()+3600*1000);
+                const expireDate = new Date(new Date().getTime() + (res.data.expiresIn * 1000))
+                console.log(expireDate);
                 localStorage.setItem('idToken', res.data.idToken);
                 localStorage.setItem('localId', res.data.localId);
                 localStorage.setItem('expireDate', expireDate);
                 dispatch(authSuccess(res.data.idToken,
                                 res.data.localId,
                                 res.data.refreshToken));
-                //send the user a verification email
-
                 //firebase default expiration time is 1hr
-                dispatch(authTimeoutCheck());
+                dispatch(authTimeoutCheck(res.data.expiresIn));
                 return res.data;
             })
             .then(resData => {
@@ -118,7 +118,7 @@ export const authenticate = (
                 console.log(err);
                 dispatch(authFail(err.response.data.error));
             });
-        }, 2000);
+        }, 1000);
         
     }
 }

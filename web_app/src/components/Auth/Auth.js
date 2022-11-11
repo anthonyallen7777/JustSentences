@@ -28,8 +28,8 @@ const Auth = (props) => {
     }
 
     let authRedirect = null;
-    if (props.isAuthenticated) {
-        authRedirect = <Navigate to="/" state={{signingUp: props.signingUp}} />
+    if (props.isLoggedIn) {
+        authRedirect = <Navigate to="/base" state={{signingUp: props.signingUp}} />
     }
 
     return (
@@ -44,7 +44,7 @@ const Auth = (props) => {
 const mapStateToProps = state => {
     return {
         signingUp: state.authenticate.signingUp,
-        isAuthenticated: state.authenticate.idToken !== null,
+        isLoggedIn: state.authenticate.idToken !== null,
         loading: state.authenticate.loading,
         error: state.authenticate.error,
     }

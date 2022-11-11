@@ -1,49 +1,73 @@
 import './App.css';
-import React from 'react';
+import React, { Suspense, useEffect, useContext, useState } from 'react';
 import { Routes, Route } from 'react-router';
+import { Navigate } from 'react-router-dom';
 
-import Landing from './components/Landing/Landing';
-import Auth from './components/Auth/Auth';
-import Base from './components/Base/Base';
+import useConstructor from './hooks/constructor-hook';
 
 //redux
 import { connect } from 'react-redux';
 import * as actions from './store/actions/index';
 
-const App = props => {
-  let content =  (
-    <Routes>
-      <Route path='/' element={<Landing />} />
-      <Route path='/signin' element={<Auth />} />
-    </Routes>
-  );
+import Landing from './components/Landing/Landing';
+const Auth = React.lazy(() => import('./components/Auth/Auth'));
+const Base = React.lazy(() => import('./components/Base/Base'));
 
-  if (props.isAuthenticated) {
+const App = props => {
+  useConstructor(() => {
+    console.log("[App Component Before Mount]");
+  });
+  const [loading, setLoading] = useState(true);
+
+  //decontruct action so we can check if it changes
+  const {onAutoSignIn} = props;
+  //componentDidMount
+  useEffect(() => {
+      onAutoSignIn();
+      console.log('[APP ComponentDidMount');
+      setLoading(false);
+  }, [onAutoSignIn]);
+
+  let content = null;
+  if (!loading) {
     content =  (
       <Routes>
-        <Route path='/' element={<Base />} />
         <Route path='/signin' element={<Auth />} />
+        {/* <Route index element={<Landing />} /> */}
+        <Route path='/' exact element={<Landing />} />
+        <Route path="/*" element={<Navigate to="/"/>} />
       </Routes>
     );
+  
+    if (props.isLoggedIn) {
+      content =  (
+        <Routes>
+          <Route path='/base' exact element={<Base />} />
+          <Route path='/*' element={<Navigate to='/base'/>} />
+        </Routes>
+      );
+    }
   }
 
   return (
     <div>
-      {content}
+      <Suspense fallback={<p>Loading...</p>}>
+        {content}
+      </Suspense>
     </div>
   );
 }
 
 const mapStateToProps = state => {
   return {
-      isAuthenticated: state.authenticate.idToken !== null
-  }
+      isLoggedIn: state.authenticate.idToken !== null,
+  };
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAuthStateCheck: () => dispatch(actions)
-  }
+    onAutoSignIn: () => dispatch(actions.authStateCheck())
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
