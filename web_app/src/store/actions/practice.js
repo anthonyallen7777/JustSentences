@@ -16,6 +16,13 @@ export const fetchSuccess = (fetchedSentences) => {
     };
 };
 
+export const fetchFail = err => {
+    return {
+        type: actionTypes.FETCH_FAIL,
+        error: err
+    };
+};
+
 export const fetchSentences = (idToken) => {
     return dispatch => {
         dispatch(fetchStart())
@@ -25,7 +32,10 @@ export const fetchSentences = (idToken) => {
         .then(res => {
             // console.log(res.data);
             dispatch(fetchSuccess(res.data));
-        });
+        })
+        .catch(err =>
+            dispatch(fetchFail(err.response.data.error))
+        );
     };
 };
 

@@ -18,3 +18,4 @@ practice mode
 
 profile
 profile setttings
+password reset

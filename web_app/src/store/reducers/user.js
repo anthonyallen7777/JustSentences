@@ -2,26 +2,23 @@ import * as actionTypes from '../actions/actionTypes';
 import updateObject from '../../util/updateObject';
 
 const initState = {
-    fetchedSentences: null,
     error: null,
     loading: false
 }
 
-const fetchStart = (state, action) => {
+const changeStart = (state) => {
     return updateObject(state, {
-        fetchedSentences: action.fetchedSentences,
         loading: true
     });
 };
 
-const fetchSuccess = (state, action) => {
+const changeSuccess = (state, action) => {
     return updateObject(state, {
-        fetchedSentences: action.fetchedSentences,
         loading: false
     });
 };
 
-const authFail = (state, action) => {
+const changeFail = (state, action) => {
     return updateObject(state, {
         error: action.error,
         loading: false
@@ -30,9 +27,9 @@ const authFail = (state, action) => {
 
 const reducer = (state = initState, action) => {
     switch(action.type) {
-        case actionTypes.FETCH_START: return fetchStart(state, action);
-        case actionTypes.FETCH_SUCCESS: return fetchSuccess(state, action);
-        case actionTypes.FETCH_FAIL: return authFail(state, action);
+        case actionTypes.CHANGE_START: return changeStart(state, action);
+        case actionTypes.CHANGE_SUCCESS: return changeSuccess(state, action);
+        case actionTypes.CHANGE_FAIL: return changeFail(state, action);
         default:
             return state;
     }

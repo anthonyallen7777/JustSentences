@@ -3,7 +3,7 @@ import classes from './Settings.module.css';
 import Modal from '../../../UI/Modal/Modal';
 
 const Settings = (props) => {
-    const [showModal, setShowModal] = useState(true);
+    const [showModal, setShowModal] = useState(false);
     return (
         <div>
             <Modal showModal={showModal}></Modal>
@@ -11,10 +11,11 @@ const Settings = (props) => {
                 <h2>Settings</h2>
             </div>
             <div>
-                <button>Change username</button>
-                <button>Change Email</button>
-                <button>Reset Progress</button>
-                <button className={classes.DeleteButton}>Delete Account</button>
+                <button onClick={() => setShowModal(!showModal)}>Change username</button>
+                <button onClick={() => setShowModal(!showModal)}>Change Email</button>
+                <button onClick={() => setShowModal(!showModal)}>Reset Progress</button>
+                <button className={classes.DeleteButton}
+                 onClick={() => setShowModal(!showModal)}>Delete Account</button>
             </div>
         </div>
     );

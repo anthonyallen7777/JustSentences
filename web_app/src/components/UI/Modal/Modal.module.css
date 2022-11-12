@@ -1,5 +1,7 @@
 .Modal {
     position: fixed;
+    right: 0;
+    bottom: 0;
     z-index: 500;
     background-color: white;
     height: 500px;
