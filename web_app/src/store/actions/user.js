@@ -4,7 +4,7 @@ const APT_CvkWER = 'AIzaSyALRbqgd_UHIFY788iVXPZ0XwQ8uKI_y2w';
 
 export const changeStart = () => {
     return {
-        type: actionTypes.AUTH_START
+        type: actionTypes.CHANGE_START
     };
 };
 
@@ -23,21 +23,21 @@ export const changeFail = err => {
 
 export const changeUsernameOrEmail = () => {
     return dispatch => {
-        dispatch(changeStart())
-
+        dispatch(changeStart());
+        dispatch(changeSuccess());
     };
 };
 
 export const resetProgress = () => {
     return dispatch => {
-        dispatch(changeStart())
-        
+        dispatch(changeStart());
+        dispatch(changeSuccess());
     };
 };
 
 export const deleteAccount = () => {
     return dispatch => {
-        dispatch(changeStart())
-        
+        dispatch(changeStart());
+        dispatch(changeSuccess());
     };
 };

@@ -1,21 +1,28 @@
 import React, { useState } from "react";
 import classes from './Settings.module.css';
-import Modal from '../../../UI/Modal/Modal';
+import Modal from './SettingsModal/SettingsModal';
 
 const Settings = (props) => {
     const [showModal, setShowModal] = useState(false);
+
+    const buttonPress = (dataToChange) => {
+        setShowModal(!showModal);
+        setDataToDisplay(dataToChange)
+    }
+
+    const [dataToDisplay, setDataToDisplay] = useState(null);
     return (
         <div>
-            <Modal showModal={showModal}></Modal>
+            <Modal showModal={showModal} dataToDisplay={dataToDisplay}></Modal>
             <div>
                 <h2>Settings</h2>
             </div>
             <div>
-                <button onClick={() => setShowModal(!showModal)}>Change username</button>
-                <button onClick={() => setShowModal(!showModal)}>Change Email</button>
-                <button onClick={() => setShowModal(!showModal)}>Reset Progress</button>
+                <button onClick={() => buttonPress('username')}>Change username</button>
+                <button onClick={() => buttonPress('email')}>Change Email</button>
+                <button onClick={() => buttonPress('progress')}>Reset Progress</button>
                 <button className={classes.DeleteButton}
-                 onClick={() => setShowModal(!showModal)}>Delete Account</button>
+                onClick={() => buttonPress('delete')}>Delete Account</button>
             </div>
         </div>
     );
