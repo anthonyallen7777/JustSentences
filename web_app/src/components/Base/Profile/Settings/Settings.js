@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import classes from './Settings.module.css';
+
+import BackButton from "../../../UI/Buttons/BackButton/BackButton";
 import Modal from './SettingsModal/SettingsModal';
 
 const Settings = (props) => {
@@ -13,6 +15,7 @@ const Settings = (props) => {
     const [dataToDisplay, setDataToDisplay] = useState(null);
     return (
         <div>
+            <BackButton />
             <Modal showModal={showModal} dataToDisplay={dataToDisplay}></Modal>
             <div>
                 <h2>Settings</h2>

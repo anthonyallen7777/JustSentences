@@ -2,7 +2,8 @@ export {
     authenticate,
     authStateCheck,
     logout,
-    checkVerification
+    checkVerification,
+    changeUsernameOrEmail
 } from './auth';
 
 export {
@@ -11,7 +12,6 @@ export {
 } from './practice';
 
 export {
-    changeUsernameOrEmail,
     resetProgress,
     deleteAccount
 } from './user';

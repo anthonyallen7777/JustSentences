@@ -5,7 +5,7 @@ import classes from './BackButton.module.css';
 const BackButton = (props) => {
     const navigate = useNavigate();
     const goBack = () => {
-        navigate('/');
+        navigate(-1);
     }
 
     return (

@@ -5,6 +5,7 @@ const initState = {
     idToken: null,
     localId: null,
     refreshToken: null,
+    displayName: null,
     error: null,
     loading: false,
     shouldWeShowVerifyBanner: null,
@@ -23,6 +24,7 @@ const authSuccess = (state, action) => {
         idToken: action.idToken,
         localId: action.localId,
         refreshToken: action.refreshToken,
+        displayName: action.displayName,
         error: null,
         loading: false
     });
@@ -46,6 +48,15 @@ const checkVerify = (state, action) => {
     });
 };
 
+const updateUsernameOrEmail = (state, action) => {
+    return updateObject(state, {
+        idToken: action.idToken,
+        refreshToken: action.refreshToken,
+        displayName: action.displayName
+    });
+};
+
+
 const reducer = (state = initState, action) => {
     switch(action.type) {
         case actionTypes.AUTH_START: return authStart(state, action);
@@ -53,6 +64,7 @@ const reducer = (state = initState, action) => {
         case actionTypes.AUTH_FAIL: return authFail(state, action);
         case actionTypes.AUTH_LOGOUT: return authLogout(state, action);
         case actionTypes.CHECK_VERIFY: return checkVerify(state, action);
+        case actionTypes.CHANGE_USERNAME_OR_EMAIL_SUCCESS: return updateUsernameOrEmail(state, action);
         default:
             return state;
     }

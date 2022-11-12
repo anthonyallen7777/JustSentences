@@ -4,6 +4,8 @@ available languages box will changed based upon well languages available LOL
 but the box will be reused and will select 4 random languages (if there are more less languages account for the size)
 
 
+make sure on signup the user cannot have to same username as another user
+
 
 practice mode
 

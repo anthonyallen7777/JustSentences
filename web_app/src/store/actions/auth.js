@@ -12,12 +12,14 @@ export const authStart = () => {
 export const authSuccess = (
                     idToken,
                     localId,
-                    refreshToken) => {
+                    refreshToken,
+                    displayName) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
         idToken: idToken,
         localId: localId,
-        refreshToken: refreshToken
+        refreshToken: refreshToken,
+        displayName: displayName
     };
 };
 
@@ -34,6 +36,7 @@ export const logout = () => {
     localStorage.removeItem('expireDate');
     localStorage.removeItem("shouldWeShowVerifyBanner");
     localStorage.removeItem("firstTimeSigningUp");
+    localStorage.removeItem('displayName');
     return {
         type: actionTypes.AUTH_LOGOUT
     }
@@ -48,7 +51,7 @@ export const authTimeoutCheck = (expireDate) => {
     }
 };
 
-export const authStateCheck = () => {
+export const authStateCheck = (isUpdatingUserInfro) => {
     return dispatch => {
         const idToken = localStorage.getItem('idToken');
         if (!idToken) {dispatch(logout());}
@@ -58,7 +61,9 @@ export const authStateCheck = () => {
                 dispatch(logout());
             } else {
                 const localId = localStorage.getItem('localId');
-                dispatch(authSuccess(idToken, localId));
+                const refreshToken = localStorage.getItem('refreshToken');
+                const displayName = localStorage.getItem('displayName');
+                dispatch(authSuccess(idToken, localId, refreshToken, displayName));
                 dispatch(authTimeoutCheck((expireDate.getTime() - new Date().getTime())/ 1000));
             }
         }
@@ -101,6 +106,8 @@ export const authenticate = (
                         }
                     )
                     .then(userAccountInfoRes => {
+                        // console.log(userAccountInfoRes.data);
+                        localStorage.setItem('displayName', userAccountInfoRes.data.users[0].displayName);
                         shouldWeShowVerifyBanner = userAccountInfoRes.data.users[0].emailVerified;
                         localStorage.setItem("shouldWeShowVerifyBanner", !shouldWeShowVerifyBanner);
                         localStorage.setItem("firstTimeSigningUp", false);
@@ -112,7 +119,8 @@ export const authenticate = (
                         dispatch(authTimeoutCheck(resData.expiresIn));
                         dispatch(authSuccess(resData.idToken,
                                         resData.localId,
-                                        resData.refreshToken));
+                                        resData.refreshToken,
+                                        userAccountInfoRes.data.users[0].displayName));
                     })
                     .catch(err => {
                         console.log(err);
@@ -131,7 +139,7 @@ export const authenticate = (
                 .then(res => {
                     return res.data;
                 })
-                //add username to as display name
+                //add username to display name
                 .then(resData => {
                     url = 'https://identitytoolkit.googleapis.com/v1/accounts:update?key=' + APT_CvkWER;
                     axios.post(url, 
@@ -140,7 +148,8 @@ export const authenticate = (
                             "displayName": username,
                         }
                     )
-                    .then(updateAccRes => {
+                    .then(updatedAccRes => {
+                        localStorage.setItem('displayName', updatedAccRes.data.displayName);
                         localStorage.setItem("shouldWeShowVerifyBanner", shouldWeShowVerifyBanner);
                         localStorage.setItem("firstTimeSigningUp", true);
                         const expireDate = new Date(new Date().getTime() + (resData.expiresIn * 1000))
@@ -149,7 +158,8 @@ export const authenticate = (
                         localStorage.setItem('expireDate', expireDate);
                         dispatch(authSuccess(resData.idToken,
                                         resData.localId,
-                                        resData.refreshToken));
+                                        resData.refreshToken,
+                                        updatedAccRes.data.displayName));
                         dispatch(authTimeoutCheck(resData.expiresIn));
                     })
                     .catch(err => {
@@ -189,5 +199,62 @@ export const checkVerification = () => {
     type: actionTypes.CHECK_VERIFY,
     shouldWeShowVerifyBanner: localStorage.getItem('shouldWeShowVerifyBanner'),
     firstTimeSigningUp: localStorage.getItem('firstTimeSigningUp'),
+    };
+};
+
+export const changeStart = () => {
+    return {
+        type: actionTypes.CHANGE_USERNAME_OR_EMAIL_START
+    };
+};
+
+export const changeSuccess = (idToken,
+                            refreshToken,
+                            displayName) => {
+    return {
+        type: actionTypes.CHANGE_USERNAME_OR_EMAIL_SUCCESS,
+        idToken: idToken,
+        refreshToken: refreshToken,
+        displayName: displayName
+    };
+};
+
+export const changeFail = err => {
+    return {
+        type: actionTypes.CHANGE_USERNAME_OR_EMAIL_FAIL,
+        error: err
+    };
+};
+
+export const changeUsernameOrEmail = (whatAreWeChanging, newUsernameOrEmail) => {
+    return dispatch => {
+        dispatch(changeStart());
+        setTimeout(() => {
+            let dataToChange = null;
+            if (whatAreWeChanging === 'email') {dataToChange = whatAreWeChanging} else {dataToChange = 'displayName'}
+            console.log(typeof dataToChange, typeof newUsernameOrEmail)
+            //change the user's username
+            const url = 'https://identitytoolkit.googleapis.com/v1/accounts:update?key=' + APT_CvkWER;
+            axios.post(url,
+                {
+                    "idToken": localStorage.getItem('idToken'),
+                    [dataToChange]: newUsernameOrEmail,
+                    returnSecureToken: true
+                }
+            )
+            .then(updatedAccRes => {
+                console.log(updatedAccRes);
+                localStorage.setItem('idToken', updatedAccRes.data.idToken);
+                localStorage.setItem('refreshToken', updatedAccRes.data.refreshToken);
+                localStorage.setItem('displayName', updatedAccRes.data.displayName);
+                dispatch(changeSuccess(updatedAccRes.data.idToken,
+                    updatedAccRes.data.refreshToken,
+                    updatedAccRes.data.displayName));
+            }).catch(err => {
+                console.log(err);
+                dispatch(changeFail());
+            })
+        }, 1000);
+        
     };
 };

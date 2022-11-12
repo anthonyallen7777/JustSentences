@@ -6,19 +6,38 @@ const initState = {
     loading: false
 }
 
-const changeStart = (state) => {
+const resetProgressStart = (state) => {
     return updateObject(state, {
         loading: true
     });
 };
 
-const changeSuccess = (state, action) => {
+const resetProgressSuccess = (state, action) => {
     return updateObject(state, {
         loading: false
     });
 };
 
-const changeFail = (state, action) => {
+const resetProgressFail = (state, action) => {
+    return updateObject(state, {
+        error: action.error,
+        loading: false
+    });
+};
+
+const deleteAccountStart = (state) => {
+    return updateObject(state, {
+        loading: true
+    });
+};
+
+const deleteAccountSuccess = (state, action) => {
+    return updateObject(state, {
+        loading: false
+    });
+};
+
+const deleteAccountFail = (state, action) => {
     return updateObject(state, {
         error: action.error,
         loading: false
@@ -27,9 +46,12 @@ const changeFail = (state, action) => {
 
 const reducer = (state = initState, action) => {
     switch(action.type) {
-        case actionTypes.CHANGE_START: return changeStart(state, action);
-        case actionTypes.CHANGE_SUCCESS: return changeSuccess(state, action);
-        case actionTypes.CHANGE_FAIL: return changeFail(state, action);
+        case actionTypes.RESET_PROGRESS_START: return resetProgressStart(state, action);
+        case actionTypes.RESET_PROGRESS_SUCCESS: return resetProgressSuccess(state, action);
+        case actionTypes.RESET_PROGRESS_FAIL: return resetProgressFail(state, action);
+        case actionTypes.DELETE_ACCOUNT_START: return deleteAccountStart(state, action);
+        case actionTypes.DELETE_ACCOUNT_SUCCESS: return deleteAccountSuccess(state, action);
+        case actionTypes.DELETE_ACCOUNT_FAIL: return deleteAccountFail(state, action);
         default:
             return state;
     }

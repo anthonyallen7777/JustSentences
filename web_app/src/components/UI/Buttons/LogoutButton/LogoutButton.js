@@ -17,8 +17,7 @@ const LogoutButton = (props) => {
 
     return (
         <React.Fragment>
-            <div className={classes.LogoutButton} onClick={logoutHandler}>
-            </div>
+            <button className={classes.LogoutButton} onClick={logoutHandler}>Sign Out</button>
         </React.Fragment>
     );
 };

@@ -14,8 +14,8 @@ const Modal = (props) => {
     const submitHandler = event => {
         event.preventDefault();
         switch(props.dataToDisplay) {
-            case 'username': return onChangeUsernameOrEmail('username');
-            case 'email': return onChangeUsernameOrEmail('email');
+            case 'username': return onChangeUsernameOrEmail('username', enteredUsername);
+            case 'email': return onChangeUsernameOrEmail('email', enteredEmail);
             case 'progress': return onResetProgress();
             case 'delete': return onDeleteAccount();
             default:
@@ -28,34 +28,43 @@ const Modal = (props) => {
     }
 
     const formFormatHandler = (toChange) => {
-        let content = null;
-        if (toChange === 'username' || toChange === 'email') {
-            let isEmail = false
-            if (toChange !== 'username') {isEmail = true}
-            return content = (
+        if (toChange === 'username') {
+            return (
+            <div>
+                <p>Change username</p>
                 <form onSubmit={submitHandler}>
                     <div className={classes.FormControl}>
-                        <label htmlFor={toChange}>Enter new {toChange}</label>
-                        <input type={isEmail ? 'email': 'text'} id={toChange}
-                        value={isEmail ? enteredEmail: enteredUsername}
-                        onChange={event => {
-                            isEmail ? setEnteredValue(event, setEmail) :
-                            setEnteredValue(event, setUsername)
-                        }} />
-                    </div>
-                    <div className={classes.FormControl}>
-                        <label htmlFor="password">Enter your password</label>
-                        <input type="password" id="password" value={enteredPassword}
-                        onChange={event => setEnteredValue(event, setPassword)} />
+                        <label htmlFor="username">Enter a new username</label>
+                        <input type="text" id="username" value={enteredUsername}
+                        onChange={event => setEnteredValue(event, setUsername)} />
                     </div>
                     <div className={classes.FormActions}>
-                        <button type="submit">Change username</button>
+                        <button type="submit">change your username</button>
                     </div>
                 </form>
+            </div>
+            );
+        }
+        if (toChange === 'email') {
+            return (
+                <div>
+                    <p>Change email</p>
+                    <form onSubmit={submitHandler}>
+                        <div className={classes.FormControl}>
+                            <label htmlFor="email">Enter your new email</label>
+                            <input type="email" id="email" value={enteredEmail}
+                            onChange={event => setEnteredValue(event, setEmail)} />
+                        </div>
+                        <div className={classes.FormActions}>
+                            <button type="submit">change your email</button>
+                        </div>
+                    </form>
+                </div>
                 );
-        } else {
+        }
+        else {
             if (toChange === 'progress') {
-                return content = (
+                return (
                     <div>
                         <p>Are you sure you want to reset your progress?</p>
                         <p>THIS PROCESS CANNOT BE UNDONE!</p>
@@ -63,7 +72,7 @@ const Modal = (props) => {
                     </div>
                     );
             } else {
-                return content = (
+                return (
                     <div>
                         <p>Are you sure you want to delete your account?</p>
                         <p>THIS PROCESS CANNOT BE UNDONE!</p>
@@ -94,7 +103,7 @@ const Modal = (props) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onChangeUsernameOrEmail: () => dispatch(actions.changeUsernameOrEmail()),
+        onChangeUsernameOrEmail: (whatAreWeChanging, newUsername) => dispatch(actions.changeUsernameOrEmail(whatAreWeChanging, newUsername)),
         onResetProgress: () => dispatch(actions.resetProgress()),
         onDeleteAccount: () => dispatch(actions.deleteAccount())
     }

@@ -2,13 +2,11 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 import VerifyBanner from "../Auth/VerifyBanner/VerifyBanner";
-import LogoutButton from '../UI/Buttons/LogoutButton/LogoutButton';
 
 const Base = (props) => {
     return (
         <div>
             <VerifyBanner />
-            <LogoutButton />
             <div>
                 <div>
                     <NavLink to='/practice'>Practice</NavLink>
