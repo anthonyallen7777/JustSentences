@@ -1,18 +1,29 @@
 import React from "react";
-import LogoutButton from '../UI/Buttons/LogoutButton';
+import { NavLink } from "react-router-dom";
 
 import VerifyBanner from "../Auth/VerifyBanner/VerifyBanner";
+import LogoutButton from '../UI/Buttons/LogoutButton/LogoutButton';
+import BackButton from "../UI/Buttons/BackButton/BackButton";
 
 const Base = (props) => {
     return (
         <div>
+            <BackButton />
             <VerifyBanner />
             <LogoutButton />
             <div>
-                <h2>Practice</h2>
-                <h2>Progress</h2>
-                <h2>Languages</h2>
-                <h2>Profile</h2>
+                <div>
+                    <NavLink to='/practice'>Practice</NavLink>
+                </div>
+                <div>
+                    <NavLink to='/progress'>Progress</NavLink>
+                </div>
+                <div>
+                    <NavLink to='/languages'>Languages</NavLink>
+                </div>
+                <div>
+                    <NavLink to='/profile'>Profile</NavLink>
+                </div>
             </div>
         </div>
     );

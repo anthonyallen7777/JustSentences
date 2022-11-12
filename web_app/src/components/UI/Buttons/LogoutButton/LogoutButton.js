@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import classes from './LogoutButton.module.css';
 
 import { useNavigate } from "react-router-dom";
 
 //redux
-import * as actions from '../../../store/actions/index';
+import * as actions from '../../../../store/actions/index';
 import { connect } from "react-redux";
 
 const LogoutButton = (props) => {
