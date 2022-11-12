@@ -5,3 +5,16 @@ but the box will be reused and will select 4 random languages (if there are more
 
 
 
+practice mode
+
+- when user clicks practice a certain amount of sentence are fetched from the database
+- those words are then selective shown to the user based upon the progress of each sentence
+- if the user knows the meaning of the sentence the sentence gets a + on progress
+- if the user doesn't know the meaning then the sentence gets a - on progress
+- this progress is not immediately sent to the user's data in the database instead we store the progress locally then when they are done practicing send the updated progress to the database
+- when the user hits the back button the progress is sent to database and the user is sent back to base
+
+
+
+profile
+profile setttings

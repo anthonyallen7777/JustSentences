@@ -141,7 +141,6 @@ export const authenticate = (
                         }
                     )
                     .then(updateAccRes => {
-                        console.log(updateAccRes);
                         localStorage.setItem("shouldWeShowVerifyBanner", shouldWeShowVerifyBanner);
                         localStorage.setItem("firstTimeSigningUp", true);
                         const expireDate = new Date(new Date().getTime() + (resData.expiresIn * 1000))
@@ -186,7 +185,6 @@ export const authenticate = (
 }
 
 export const checkVerification = () => {
-    console.log(localStorage.getItem('shouldWeShowVerifyBanner'));
     return {
     type: actionTypes.CHECK_VERIFY,
     shouldWeShowVerifyBanner: localStorage.getItem('shouldWeShowVerifyBanner'),

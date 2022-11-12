@@ -18,10 +18,11 @@ const Settings = React.lazy(() => import('./components/Base/Profile/Settings/Set
 const App = props => {
   const [loading, setLoading] = useState(true);
   //decontruct action so we can check if it changes
-  const {onAutoSignIn} = props;
+  const {onAutoSignIn, isLoggedIn} = props;
   useEffect(() => {
       onAutoSignIn();
       setLoading(false);
+      // console.log("[App componentDidMount]");
   }, [onAutoSignIn]);
 
   let content = null;
@@ -34,7 +35,7 @@ const App = props => {
       </Routes>
     );
   
-    if (props.isLoggedIn) {
+    if (isLoggedIn) {
       content =  (
         <Routes>
           <Route path='/profile/settings' exact element={<Settings />} />

@@ -4,3 +4,8 @@ export {
     logout,
     checkVerification
 } from './auth';
+
+export {
+    fetchSentences,
+    practiceDone
+} from './practice';

@@ -3,12 +3,10 @@ import { NavLink } from "react-router-dom";
 
 import VerifyBanner from "../Auth/VerifyBanner/VerifyBanner";
 import LogoutButton from '../UI/Buttons/LogoutButton/LogoutButton';
-import BackButton from "../UI/Buttons/BackButton/BackButton";
 
 const Base = (props) => {
     return (
         <div>
-            <BackButton />
             <VerifyBanner />
             <LogoutButton />
             <div>

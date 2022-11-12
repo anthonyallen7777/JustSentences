@@ -30,7 +30,7 @@ const authSuccess = (state, action) => {
 
 const authLogout = (state) => {
     return updateObject(state, {token: null, userId: null});
-}
+};
 
 const authFail = (state, action) => {
     return updateObject(state, {
@@ -44,7 +44,7 @@ const checkVerify = (state, action) => {
         shouldWeShowVerifyBanner: action.shouldWeShowVerifyBanner,
         firstTimeSigningUp: action.firstTimeSigningUp
     });
-}
+};
 
 const reducer = (state = initState, action) => {
     switch(action.type) {
