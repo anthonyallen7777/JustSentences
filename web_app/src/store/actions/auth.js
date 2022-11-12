@@ -106,16 +106,17 @@ export const authenticate = (
                         }
                     )
                     .then(userAccountInfoRes => {
-                        // console.log(userAccountInfoRes.data);
                         localStorage.setItem('displayName', userAccountInfoRes.data.users[0].displayName);
                         shouldWeShowVerifyBanner = userAccountInfoRes.data.users[0].emailVerified;
                         localStorage.setItem("shouldWeShowVerifyBanner", !shouldWeShowVerifyBanner);
                         localStorage.setItem("firstTimeSigningUp", false);
                         const expireDate = new Date(new Date().getTime() + (resData.expiresIn * 1000))
                         localStorage.setItem('idToken', resData.idToken);
+                        localStorage.setItem('refreshToken', resData.refreshToken);
                         localStorage.setItem('localId', resData.localId);
                         localStorage.setItem('expireDate', expireDate);
                         
+                        console.log(resData.refreshToken);
                         dispatch(authTimeoutCheck(resData.expiresIn));
                         dispatch(authSuccess(resData.idToken,
                                         resData.localId,
