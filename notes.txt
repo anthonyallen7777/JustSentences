@@ -33,3 +33,7 @@ also diplay text saying we are logging you out
 base this off of changeSuccess or authSuccess
 
 css now
+
+background-color fade in and out through sections
+
+sectionfour sticky from top oppisite of other sections

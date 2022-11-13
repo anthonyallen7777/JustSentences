@@ -22,7 +22,6 @@ const SectionOne = () => {
         if (clicked) {
             if (clicked === 'left') {
                 --currIndex;
-                console.log(currIndex);
                 if (currIndex < 0) {
                     currIndex = tempSentences.length-1;
                 }

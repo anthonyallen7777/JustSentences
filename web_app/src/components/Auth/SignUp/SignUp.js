@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect, useCallback  } from "react";
 import classes from './SignUp.module.css';
 
 //redux import actions from auth action creator
@@ -6,47 +6,195 @@ import * as actions from '../../../store/actions/index';
 import { connect } from "react-redux";
 
 const SignUp = (props) => {
-    const [enteredUsername, setUsername] = useState('Username');
-    const [enteredEmail, setEmail] = useState('Email');
-    const [enteredPassword, setPassword] = useState('');
+    const ref = useRef(null);
+    const [enteredUsername, setUsername] = useState('enter a username');
+    const [clickedUsername, setClickedUsername] = useState(false);
+    const [enteredEmail, setEmail] = useState('enter your email');
+    const [clickedEmail, setClickedEmail] = useState(false);
+    const [enteredEmailConfirm, setEmailConfirm] = useState('enter email again');
+    const [clickedEmailConfirm, setClickedEmailConfirm] = useState(false);
+    const [enteredPassword, setPassword] = useState('Enter a unique password');
+    const [clickedPassword, setClickedPassword] = useState(false);
+    const [passwordType, setPasswordType] = useState("text");
+    const [enteredPasswordConfirm, setPasswordConfirm] = useState('enter password again');
+    const [clickedPasswordConfirm, setClickedPasswordConfirm] = useState(false);
+    const [passwordConfirmType, setPasswordConfirmType] = useState("text");
+    const [lastInputValue, setLastInputValue] = useState(null);
+    const [lastInputType, setLastInputType] = useState(null);
+
+    const { onClickOutside } = props;
+
+    const clickAwayHandler = useCallback((setState) => {
+        if (lastInputValue !== null) {
+            if (lastInputValue === '') {
+                console.log("LASTINPUT IS EMPTY");
+                switch(lastInputType) {
+                    case 'username': setUsername('enter a username');
+                    break;
+                    case 'email': setEmail('enter your email');
+                    break;
+                    case 'emailConfirm': setEmailConfirm('enter email again');
+                    break;
+                    case 'password': {
+                        setPasswordType("text");
+                        setPassword('Enter a unique password');
+                        setClickedPassword(false);
+                        break;
+                    }
+                    case 'passwordConfirm': {
+                        setPasswordConfirmType("text");
+                        setPasswordConfirm('enter password again');
+                        setClickedPasswordConfirm(false);
+                        break;
+                    }
+                    default:
+                        break;
+                }
+            }
+        }
+    }, [lastInputValue, lastInputType]);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+        if (ref.current && !ref.current.contains(event.target)) {
+            onClickOutside && onClickOutside();
+            console.log("CLICKED OUTSIDE");
+            clickAwayHandler();
+        }
+        };
+        document.addEventListener('click', handleClickOutside, true);
+        return () => {
+        document.removeEventListener('click', handleClickOutside, true);
+        };
+    }, [ onClickOutside,clickAwayHandler]);
+
     const submitHandler = event => {
         event.preventDefault();
-        props.onAuthenticate(
-            enteredUsername,
-            enteredEmail,
-            enteredPassword,
-            true);
+        if (enteredEmail === enteredEmailConfirm &&
+            enteredPassword === enteredPasswordConfirm) {
+                props.onAuthenticate(
+                    enteredUsername,
+                    enteredEmail,
+                    enteredPassword,
+                    true);
+            }
     }
 
-    const setEnteredValue = (event, setState) => {
+    const setEnteredValue = (event, setState, lastInputT) => {
         setState(event.target.value);
+        setLastInputValue(event.target.value);
+        setLastInputType(lastInputT);
     }
 
-    return (
-        <div>
-            <p>Sign Up</p>
-            <form onSubmit={submitHandler}>
-                <div className={classes.FormControl}>
-                    <label htmlFor="username">Enter a username</label>
-                    <input type="text" id="username" value={enteredUsername}
-                    onChange={event => setEnteredValue(event, setUsername)} />
-                </div>
-                <div className={classes.FormControl}>
-                    <label htmlFor="email">Enter your Email</label>
-                    <input type="email" id="email" value={enteredEmail}
-                    onChange={event => setEnteredValue(event, setEmail)} />
-                </div>
-                <div className={classes.FormControl}>
-                    <label htmlFor="password">Enter a unique password</label>
-                    <input type="password" id="password" value={enteredPassword}
-                    onChange={event => setEnteredValue(event, setPassword)} />
-                </div>
-                <div className={classes.FormActions}>
-                    <button type="submit">Sign Up</button>
-                </div>
-            </form>
-        </div>
-    );
+    const clickedInputHandler = (clicked, setClick, setValue, type, setType) => {
+        if (clicked) {
+            return null;
+        } else {
+            setValue('');
+            setClick(true);
+            if (type !== null) {
+                setType("password");
+            }
+        }
+    }
+
+    let content = null;
+
+    if (props.isLanding) {
+        content = (
+            <div className={classes.LandingSignUp}>
+                <p>Sign Up</p>
+                <form onSubmit={submitHandler}  ref={ref}>
+                    <div className={classes.FormControl}>
+                        <input type="text" id="username" value={enteredUsername}
+                        onChange={event => setEnteredValue(event, setUsername, 'username')}
+                        onClick={() =>
+                            clickedInputHandler(clickedUsername, setClickedUsername,
+                            setUsername, null)} />
+                    </div>
+                    <div className={classes.FormControl}>
+                        <input type="email" id="email" value={enteredEmail}
+                        onChange={event => setEnteredValue(event, setEmail, 'email')}
+                        onClick={() =>
+                            clickedInputHandler(clickedEmail, setClickedEmail,
+                            setEmail, null)} />
+                    </div>
+                    <div className={classes.FormControl}>
+                        <input type="email" id="emailConfirm" value={enteredEmailConfirm}
+                        onChange={event => setEnteredValue(event, setEmailConfirm, 'emailConfirm')}
+                        onClick={() =>
+                            clickedInputHandler(clickedEmailConfirm, setClickedEmailConfirm,
+                            setEmailConfirm, null)} />
+                    </div>
+                    <div className={classes.FormControl}>
+                        <input type={passwordType} id="password" value={enteredPassword}
+                        onChange={event => setEnteredValue(event, setPassword, 'password')}
+                        onClick={() =>
+                        clickedInputHandler(clickedPassword, setClickedPassword,
+                        setPassword, passwordType, setPasswordType)} />
+                    </div>
+                    <div className={classes.FormControl}>
+                        <input type={passwordConfirmType} id="passwordConfirm" value={enteredPasswordConfirm}
+                        onChange={event => setEnteredValue(event, setPasswordConfirm, 'passwordConfirm')}
+                        onClick={() =>
+                            clickedInputHandler(clickedPasswordConfirm, setClickedPasswordConfirm,
+                            setPasswordConfirm, passwordConfirmType, setPasswordConfirmType)} />
+                    </div>
+                    <div className={classes.FormActions}>
+                        <button type="submit">Sign Up</button>
+                    </div>
+                </form>
+            </div>
+        );
+    } else {
+        content = (
+            <div className={classes.SignUp}>
+                <p>Sign Up</p>
+                <form onSubmit={submitHandler}  ref={ref}>
+                    <div className={classes.FormControl}>
+                        <input type="text" id="username" value={enteredUsername}
+                        onChange={event => setEnteredValue(event, setUsername, 'username')}
+                        onClick={() =>
+                            clickedInputHandler(clickedUsername, setClickedUsername,
+                            setUsername, null)} />
+                    </div>
+                    <div className={classes.FormControl}>
+                        <input type="email" id="email" value={enteredEmail}
+                        onChange={event => setEnteredValue(event, setEmail, 'email')}
+                        onClick={() =>
+                            clickedInputHandler(clickedEmail, setClickedEmail,
+                            setEmail, null)} />
+                    </div>
+                    <div className={classes.FormControl}>
+                        <input type="email" id="emailConfirm" value={enteredEmailConfirm}
+                        onChange={event => setEnteredValue(event, setEmailConfirm, 'emailConfirm')}
+                        onClick={() =>
+                            clickedInputHandler(clickedEmailConfirm, setClickedEmailConfirm,
+                            setEmailConfirm, null)} />
+                    </div>
+                    <div className={classes.FormControl}>
+                        <input type={passwordType} id="password" value={enteredPassword}
+                        onChange={event => setEnteredValue(event, setPassword, 'password')}
+                        onClick={() =>
+                        clickedInputHandler(clickedPassword, setClickedPassword,
+                        setPassword, passwordType, setPasswordType)} />
+                    </div>
+                    <div className={classes.FormControl}>
+                        <input type={passwordConfirmType} id="passwordConfirm" value={enteredPasswordConfirm}
+                        onChange={event => setEnteredValue(event, setPasswordConfirm, 'passwordConfirm')}
+                        onClick={() =>
+                            clickedInputHandler(clickedPasswordConfirm, setClickedPasswordConfirm,
+                            setPasswordConfirm, passwordConfirmType, setPasswordConfirmType)} />
+                    </div>
+                    <div className={classes.FormActions}>
+                        <button type="submit">Sign Up</button>
+                    </div>
+                </form>
+            </div>
+        );
+    }
+
+    return content;
 };
 
 const mapDispatchToProps = dispatch => {
