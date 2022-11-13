@@ -1,13 +1,45 @@
-.Text {
-    
+.TextContainer {
+    width: 100%;
+    font-size: 2rem;
+    display: flex;
+    flex-direction: column;
 }
 
 .PracticeText {
-    margin-top: 6rem;
-    background-color: aqua;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    height: 100px;
+    background-color: rgb(235, 235, 212);
 }
 
 .TranslatedText {
-    margin-bottom: 6rem;
-    background-color: aqua;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(235, 235, 212);
 }
+
+.ArrowContainer {
+    width: 50px;
+    padding: 150px 0;
+}
+
+.Arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+  }
+  
+  .Right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+  }
+  
+  .Left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+  }

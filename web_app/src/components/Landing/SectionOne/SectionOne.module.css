@@ -1,7 +1,7 @@
 .SectionOneContainer {
     display: flex;
     justify-content: space-between;
-    margin: 100px 0 300px 0;
+    height: 100vh;
 }
 
 .Box {
@@ -34,8 +34,8 @@
 .SnapshotContainer {
     background-color: beige;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     border: 1px solid black;
     border-radius: 5px;
     box-shadow: 5px 5px 2px black;
