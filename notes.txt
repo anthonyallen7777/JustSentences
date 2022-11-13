@@ -28,4 +28,8 @@ progress reset should be languaged based
 - meaning if you want t reset a language specifically you can
 
 
+if the user changes username or email sign them out
+also diplay text saying we are logging you out
+base this off of changeSuccess or authSuccess
+
 css now

@@ -1,6 +1,6 @@
 import React from "react";
 import Languages from "../../UI/Languages/Languages";
-import PracticeSnapshot from "../../UI/PracticeSnapshot/PracticeSnapshot";
+import PracticeSnapshot from "../PracticeSnapshot/PracticeSnapshot";
 
 const SectionThree = () => {
     return (

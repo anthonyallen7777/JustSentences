@@ -1,0 +1,42 @@
+.SectionOneContainer {
+    display: flex;
+    justify-content: space-between;
+    margin: 100px 0 300px 0;
+}
+
+.Box {
+    height: 400px;
+    width: 450px;
+    margin: 0 2rem;
+    text-align: center;
+}
+
+.TextContainer {
+    text-align: left;
+    display: flex;
+    margin-top: 0;
+    margin-bottom: 0;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.PracticeText {
+    margin: 0;
+    font-size: 5rem;
+    font-weight: bold;
+}
+
+.PracticeText:hover {
+    text-decoration: underline;
+    cursor: default;
+}
+
+.SnapshotContainer {
+    background-color: beige;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 5px 5px 2px black;
+}
