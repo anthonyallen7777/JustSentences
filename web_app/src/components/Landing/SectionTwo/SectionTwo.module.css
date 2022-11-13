@@ -1,0 +1,28 @@
+.SectionTwoContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.TextContainer {
+    text-align: end;
+    display: flex;
+    margin-top: 0;
+    margin-bottom: 0;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-right: 2rem;
+}
+
+.Text {
+    font-size: 5rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.Text:hover {
+    text-decoration: underline;
+    cursor: default;
+}

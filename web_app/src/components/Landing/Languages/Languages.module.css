@@ -1,0 +1,21 @@
+.Box {
+    background-color: beige;
+    height: 400px;
+    width: 500px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+    margin-left: 2rem;
+}
+
+.Stretch {
+    background-color: blue;
+    height: 50px;
+    width: 500px;
+}
+
+.Stretch div {
+    display: inline;
+}

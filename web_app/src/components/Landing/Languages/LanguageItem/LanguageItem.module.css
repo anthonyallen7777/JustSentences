@@ -1,0 +1,16 @@
+.LanguageItemContainer {
+    background-color: #ebebd4;
+    height: 25%;
+    width: 25%;
+    border-radius: 25px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+}
+
+.LanguageItemContainer span {
+    height: 80%;
+    width: 80%;
+}

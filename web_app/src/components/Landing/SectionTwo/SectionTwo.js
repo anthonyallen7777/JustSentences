@@ -1,11 +1,15 @@
 import React from "react";
-import Languages from "../../UI/Languages/Languages";
+import Languages from "../Languages/Languages";
+import classes from './SectionTwo.module.css';
 
 const SectionTwo = (props) => {
     return (
-        <div>
+        <div className={classes.SectionTwoContainer}>
             <Languages langClass="Box" />
-            <p>Available Languages</p>
+            <div className={classes.TextContainer}>
+                <p className={classes.Text}>Available</p>
+                <p className={classes.Text}>Languages</p>
+            </div>
         </div>
     );
 };
