@@ -56,7 +56,7 @@ const SectionOne = () => {
     let snapshotContent = <p>Loading...</p>;
     if (!loading) {
         snapshotContent = (
-            <PracticeSnapshot currentSentence={sentence} clicked={snapshotChangeHandler} />
+            <PracticeSnapshot currentSentence={sentence} clicked={snapshotChangeHandler} practiceMode={false} />
         );
     }
     return (

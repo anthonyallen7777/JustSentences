@@ -1,0 +1,60 @@
+.SectionThreeContainer {
+    display: flex;
+    background-color: tan;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.LanguagesContainer {
+    border-radius: 25px;
+    background-color: beige;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    margin-bottom: 25px;
+}
+
+.ArrowContainer {
+    width: 50px;
+    height: 100%;
+    text-align: center;
+}
+
+.Arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  margin: 100% 0;
+}
+  
+.Right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.Left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+.Box {
+    height: 400px;
+    width: 450px;
+    margin: 0 2rem;
+    text-align: center;
+}
+
+.SnapshotContainer {
+    background-color: beige;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 5px 5px 2px black;
+}

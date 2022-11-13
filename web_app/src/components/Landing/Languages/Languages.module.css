@@ -11,11 +11,15 @@
 }
 
 .Stretch {
-    background-color: blue;
-    height: 50px;
-    width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
 }
 
 .Stretch div {
-    display: inline;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
 }

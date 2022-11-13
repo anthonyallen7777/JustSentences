@@ -1,4 +1,4 @@
-.LanguageItemContainer {
+.Box {
     background-color: #ebebd4;
     height: 25%;
     width: 25%;
@@ -10,7 +10,26 @@
     margin: 0 5px;
 }
 
-.LanguageItemContainer span {
+.Box span {
     height: 80%;
     width: 80%;
+}
+
+.Stretch {
+    height: 100px;
+    width: 100px;
+    border-radius: 10px;
+}
+
+.Stretch:hover {
+    box-shadow: 0 5px 5px -2px black;
+}
+.Stretch:active {
+    background-color: red;
+}
+
+.Stretch span {
+    border-radius: 10px;
+    height: 90%;
+    width: 90%;
 }

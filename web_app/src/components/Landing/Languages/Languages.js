@@ -9,10 +9,10 @@ const Languages = props => {
     const [availableLanguages, setAvailableLanguages] = useState(['eng','jpn','fr']);
     return (
         <div className={classes[props.langClass]}>
-            <LanguageItem />
-            <LanguageItem />
-            <LanguageItem />
-            <LanguageItem />
+            <LanguageItem langClass={props.langClass} clicked={props.clicked} />
+            <LanguageItem langClass={props.langClass} clicked={props.clicked} />
+            <LanguageItem langClass={props.langClass} clicked={props.clicked} />
+            <LanguageItem langClass={props.langClass} clicked={props.clicked} />
         </div>
     );
 };

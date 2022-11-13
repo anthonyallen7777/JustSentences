@@ -3,7 +3,7 @@ import classes from './LanguageItem.module.css';
 
 const LanguageItem = (props) => {
     return (
-        <div className={classes.LanguageItemContainer}>
+        <div className={classes[props.langClass]} onClick={()=> props.clicked('Finland')}>
             <span className="fi fi-gr"></span>
         </div>
     );
