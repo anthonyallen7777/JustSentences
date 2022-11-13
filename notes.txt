@@ -33,6 +33,13 @@ also diplay text saying we are logging you out
 base this off of changeSuccess or authSuccess
 
 css now
+landing page - done
+sign in -
+practice -
+progress -
+languages -
+profile -
+settings -
 
 background-color fade in and out through sections
 

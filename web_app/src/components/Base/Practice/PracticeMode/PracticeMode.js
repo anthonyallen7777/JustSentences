@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import classes from './PracticeMode.module.css';
 
 const PracticeMode = (props) => {
-    const [testNumber, setTestNumber] = useState(0);
-    const changeSentence = () => {
-        console.log("CLICKED");
-        setTestNumber(testNumber - 1);
+    const progressHandler = (knowOrDont) => {
+        if (knowOrDont) {
+            console.log("GOOD JOB");
+        } else {
+            console.log("NICE TRY KEEP PRACTICING");
+        }
     }
 
     let content = <p>Loading...</p>;
@@ -22,22 +24,25 @@ const PracticeMode = (props) => {
             //     console.log(sentence);
             //     return null;
             // });
-              
+
             content = (
-                <div className={classes.PracticeContainer}>
-                    <div className={classes.PracticeSentence}>
-                        {testNumber}
-                        {practiceSentence}
+                <React.Fragment>
+                    <div className={classes.PracticeContainer}>
+                        <div className={classes.PracticeText}>
+                            {practiceSentence}
+                        </div>
+                        <div className={classes.TranslatedText}>
+                            {translatedSentence}
+                        </div>
+                        <div className={classes.ProgressButtonContainer}>
+                            <button onClick={() => progressHandler(true)}
+                            className={classes.ProgressButton}>I know this</button>
+                            <button onClick={() => progressHandler(false)}
+                            className={classes.ProgressButton}>I don't know this</button>
+                        </div>
                     </div>
-                    <div className={classes.TranslatedSentence}>
-                        {translatedSentence}
-                    </div>
-                    <div className={classes.ProgressButtonContainer}>
-                        <button onClick={changeSentence} className={classes.ProgressButton}>I don't know</button>
-                        <button className={classes.ProgressButton}>I know</button>
-                    </div>
-                </div>
-                );
+                </React.Fragment>
+            );
         }
     }
 

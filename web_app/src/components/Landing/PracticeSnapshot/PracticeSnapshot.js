@@ -22,19 +22,19 @@ const PracticeSnapshot = (props) => {
     if (props.practiceMode) {
         content = (
             <React.Fragment>
-            <div className={classes.TextContainer}>
-                <div className={classes.PracticeText}>
-                    <p>{practiceText}</p>
+                <div className={classes.TextContainer}>
+                    <div className={classes.PracticeText}>
+                        <p>{practiceText}</p>
+                    </div>
+                    <div className={classes.TranslatedText}>
+                        <p>{translatedText}</p>
+                    </div>
+                    <div>
+                        <button onClick={() => progressHandler(true)}>I know this</button>
+                        <button onClick={() => progressHandler(false)}>I don't know this</button>
+                    </div>
                 </div>
-                <div className={classes.TranslatedText}>
-                    <p>{translatedText}</p>
-                </div>
-                <div>
-                    <button onClick={() => progressHandler(true)}>I know this</button>
-                    <button onClick={() => progressHandler(false)}>I don't know this</button>
-                </div>
-            </div>
-        </React.Fragment>
+            </React.Fragment>
         );
     } else {
         content = (

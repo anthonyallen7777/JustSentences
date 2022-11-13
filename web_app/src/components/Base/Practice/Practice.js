@@ -16,7 +16,7 @@ const Practice = (props) => {
     }, [onFetchSentences]);
 
     return (
-        <div>
+        <div className={classes.PracticeContainer}>
             <div className={classes.PracticeHeader}>
                 <BackButton className={classes.Button} />
                 <h2 className={classes.Title}>Practice</h2>
