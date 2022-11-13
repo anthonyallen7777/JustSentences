@@ -1,5 +1,5 @@
 .Box {
-    background-color: beige;
+    background-color: #fdfdeb;
     height: 400px;
     width: 500px;
     display: flex;
@@ -8,6 +8,7 @@
     align-items: center;
     border-radius: 25px;
     margin-left: 2rem;
+    align-self: center;
 }
 
 .Stretch {

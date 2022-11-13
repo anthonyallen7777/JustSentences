@@ -7,16 +7,16 @@ import { connect } from "react-redux";
 
 const SignUp = (props) => {
     const ref = useRef(null);
-    const [enteredUsername, setUsername] = useState('enter a username');
+    const [enteredUsername, setUsername] = useState('Enter a username');
     const [clickedUsername, setClickedUsername] = useState(false);
-    const [enteredEmail, setEmail] = useState('enter your email');
+    const [enteredEmail, setEmail] = useState('Enter your email');
     const [clickedEmail, setClickedEmail] = useState(false);
-    const [enteredEmailConfirm, setEmailConfirm] = useState('enter email again');
+    const [enteredEmailConfirm, setEmailConfirm] = useState('Enter email again');
     const [clickedEmailConfirm, setClickedEmailConfirm] = useState(false);
     const [enteredPassword, setPassword] = useState('Enter a unique password');
     const [clickedPassword, setClickedPassword] = useState(false);
     const [passwordType, setPasswordType] = useState("text");
-    const [enteredPasswordConfirm, setPasswordConfirm] = useState('enter password again');
+    const [enteredPasswordConfirm, setPasswordConfirm] = useState('Enter password again');
     const [clickedPasswordConfirm, setClickedPasswordConfirm] = useState(false);
     const [passwordConfirmType, setPasswordConfirmType] = useState("text");
     const [lastInputValue, setLastInputValue] = useState(null);
@@ -27,13 +27,12 @@ const SignUp = (props) => {
     const clickAwayHandler = useCallback((setState) => {
         if (lastInputValue !== null) {
             if (lastInputValue === '') {
-                console.log("LASTINPUT IS EMPTY");
                 switch(lastInputType) {
-                    case 'username': setUsername('enter a username');
+                    case 'username': setUsername('Enter a username');
                     break;
-                    case 'email': setEmail('enter your email');
+                    case 'email': setEmail('Enter your email');
                     break;
-                    case 'emailConfirm': setEmailConfirm('enter email again');
+                    case 'emailConfirm': setEmailConfirm('Enter email again');
                     break;
                     case 'password': {
                         setPasswordType("text");
@@ -43,7 +42,7 @@ const SignUp = (props) => {
                     }
                     case 'passwordConfirm': {
                         setPasswordConfirmType("text");
-                        setPasswordConfirm('enter password again');
+                        setPasswordConfirm('Enter password again');
                         setClickedPasswordConfirm(false);
                         break;
                     }
@@ -58,7 +57,6 @@ const SignUp = (props) => {
         const handleClickOutside = (event) => {
         if (ref.current && !ref.current.contains(event.target)) {
             onClickOutside && onClickOutside();
-            console.log("CLICKED OUTSIDE");
             clickAwayHandler();
         }
         };

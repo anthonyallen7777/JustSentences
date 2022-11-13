@@ -1,6 +1,6 @@
 .SectionFourContainer {
     display: flex;
-    background-color: tan;
+    background-color: #ddddff;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -9,7 +9,6 @@
 }
 
 .TextContainer {
-    background-color: aliceblue;
     height: 500px;
     width: 500px;
     margin-left: 2rem;
@@ -37,7 +36,6 @@
 .SignUpContainer {
     position: sticky;
     bottom: 0;
-    background-color: aliceblue;
     height: 500px;
     width: 500px;
     margin-right: 2rem;
@@ -45,4 +43,6 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    background-color: rgb(253, 253, 235);
+    border-radius: 25px;
 }

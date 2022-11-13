@@ -1,5 +1,4 @@
 .LandingSignUp {
-    background-color: red;
     height: 100%;
     width: 80%;
     display: flex;
@@ -8,13 +7,11 @@
 }
 
 .LandingSignUp p {
-    font-size: 3rem;
-    background-color: aquamarine;
+    font-size: 2.5rem;
 }
 
 .LandingSignUp form {
     font-size: 1.5rem;
-    background-color: brown;
     width: 100%;
     height: 100%;
     display: flex;
@@ -25,10 +22,30 @@
 .LandingSignUp .FormControl {
     font-size: 1.2rem;
     display: inline-block;
-    background-color: rgb(61, 61, 167);
     margin: 15px 0;
-    text-align: center;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     height: 30px;
+    border-radius: 25px;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.LandingSignUp .FormControl input {
+    color: grey;
+    border-radius: 5px;
+    border: none;
+    width: 100%;
+}
+
+.LandingSignUp .FormControl input:focus {
+}
+
+.LandingSignUp .FormActions button {
+    color: grey;
+    border-radius: 25px;
+    border: none;
+    width: 50%;
+    height: 50px;
+    font-size: 25px;
 }

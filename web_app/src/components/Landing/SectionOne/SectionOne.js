@@ -47,7 +47,7 @@ const SectionOne = () => {
         displaySentenceHandler();
         const interval = setInterval(() => {
             displaySentenceHandler();
-        }, 10000);
+        }, 3000);
         return () => clearInterval(interval);
     }, [displaySentenceHandler]);
 

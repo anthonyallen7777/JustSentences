@@ -1,6 +1,6 @@
 .SectionThreeContainer {
     display: flex;
-    background-color: tan;
+    background-color: #ddddff;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -12,7 +12,7 @@
 
 .LanguagesContainer {
     border-radius: 25px;
-    background-color: beige;
+    background-color: #fdfdeb;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,7 +52,7 @@
 }
 
 .SnapshotContainer {
-    background-color: beige;
+    background-color: #fdfdeb;
     display: flex;
     justify-content: center;
     align-items: center;
