@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classes from './Auth.module.css';
 
 import SignIn from "./SignIn/SignIn";
@@ -11,15 +11,53 @@ import { Navigate } from "react-router";
 import { connect } from "react-redux";
 
 const Auth = (props) => {
-    let forms = (
-        <React.Fragment>
-            <SignIn />
-            <SignUp />
-        </React.Fragment>
-    );
+    const [wantToSignUp, setWantToSignUp] = useState(false);
+    const [loadingForm, setLoadingForm] = useState(true);
+
+    const onClickHandler = (update) => {
+        if (wantToSignUp !== update) {
+            setWantToSignUp(prevState => !prevState);
+        }
+    };
+
+    useEffect(() => {
+        setLoadingForm(false);
+    }, []);
+    
+    let form = null;
+    let activeStyle = null;
+    if (!wantToSignUp) {
+        activeStyle = classes.SignInActive;
+        form = <SignIn />;
+    } else {
+        activeStyle = classes.SignUpActive;
+        form = <SignUp />;
+    }
+
+    let signUpSignIn = <p>Loading...</p>;
+    
+    if (!loadingForm) {
+        signUpSignIn = (
+            <React.Fragment>
+                <div className={[classes.Titles, activeStyle].join(' ')}>
+                    <div className={classes.Button}
+                    onClick={() => onClickHandler(false)}>
+                        <p>Sign In</p>
+                    </div>
+                    <div className={classes.Button}
+                    onClick={() => onClickHandler(true)}>
+                        <p>Sign Up</p>
+                    </div>
+                </div>
+                <div className={classes.FormContainer}>
+                    {form}
+                </div>
+            </React.Fragment>
+        );
+    }
 
     if (props.loading) {
-        forms = <Spinner />
+        form = <Spinner />;
     }
 
     let errMessage = null;
@@ -33,10 +71,12 @@ const Auth = (props) => {
     }
 
     return (
-        <div className={classes.FormsContainer}>
-            {authRedirect}
-            {errMessage}
-            {forms}
+        <div className={classes.AuthContainer}>
+            <div className={classes.signUpSignInContainer}>
+                {authRedirect}
+                {errMessage}
+                {signUpSignIn}
+            </div>
         </div>
     );
 };

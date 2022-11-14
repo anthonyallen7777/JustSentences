@@ -147,7 +147,6 @@ const SignUp = (props) => {
     } else {
         content = (
             <div className={classes.SignUp}>
-                <p>Sign Up</p>
                 <form onSubmit={submitHandler}  ref={ref}>
                     <div className={classes.FormControl}>
                         <input type="text" id="username" value={enteredUsername}

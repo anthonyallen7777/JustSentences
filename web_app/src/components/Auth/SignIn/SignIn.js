@@ -6,8 +6,12 @@ import * as actions from '../../../store/actions/index';
 import { connect } from "react-redux";
 
 const SignIn = (props) => {
-    const [enteredEmail, setEmail] = useState('Email');
-    const [enteredPassword, setPassword] = useState('');
+    const [enteredEmail, setEmail] = useState('Enter your email');
+    const [clickedEmail, setClickedEmail] = useState(false);
+    const [enteredPassword, setPassword] = useState('Enter password');
+    const [clickedPassword, setClickedPassword] = useState(false);
+    const [passwordType, setPasswordType] = useState("text");
+    
     const submitHandler = event => {
         event.preventDefault();
         props.onAuthenticate(
@@ -21,24 +25,39 @@ const SignIn = (props) => {
         setState(event.target.value);
     }
 
+    const clickedInputHandler = (clicked, setClick, setValue, type, setType) => {
+        if (clicked) {
+            return null;
+        } else {
+            setValue('');
+            setClick(true);
+            if (type !== null) {
+                setType("password");
+            }
+        }
+    }
+
     return (
-        <div>
-            <p>Sign In</p>
+        <div className={classes.SignIn}>
             <form onSubmit={submitHandler}>
-                <div className={classes.FormControl}>
-                    <label htmlFor="email">Enter your Email</label>
-                    <input type="email" id="email" value={enteredEmail}
-                    onChange={event => setEnteredValue(event, setEmail)} />
-                </div>
-                <div className={classes.FormControl}>
-                    <label htmlFor="password">Enter your password</label>
-                    <input type="password" id="password" value={enteredPassword}
-                    onChange={event => setEnteredValue(event, setPassword)} />
-                </div>
-                <div className={classes.FormActions}>
-                    <button type="submit">SignIn</button>
-                </div>
-            </form>
+                    <div className={classes.FormControl}>
+                        <input type="email" id="email" value={enteredEmail}
+                        onChange={event => setEnteredValue(event, setEmail, 'email')}
+                        onClick={() =>
+                            clickedInputHandler(clickedEmail, setClickedEmail,
+                            setEmail, null)} />
+                    </div>
+                    <div className={classes.FormControl}>
+                        <input type={passwordType} id="password" value={enteredPassword}
+                        onChange={event => setEnteredValue(event, setPassword, 'password')}
+                        onClick={() =>
+                        clickedInputHandler(clickedPassword, setClickedPassword,
+                        setPassword, passwordType, setPasswordType)} />
+                    </div>
+                    <div className={classes.FormActions}>
+                        <button type="submit">Sign In</button>
+                    </div>
+                </form>
         </div>
     );
 };
