@@ -13,5 +13,6 @@ export {
 
 export {
     resetProgress,
-    deleteAccount
+    deleteAccount,
+    fetchUserProgress
 } from './user';

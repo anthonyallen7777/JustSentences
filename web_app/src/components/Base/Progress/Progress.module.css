@@ -1,0 +1,56 @@
+.ProgressContainer {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.TitleContainer {
+    height: 10%;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid black;
+}
+
+.DateAndTimeStudiedContainer {
+    height: 90%;
+    width: 100%;
+    display: flex;
+}
+
+.DateContainer {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border-right: 1px solid black;
+}
+
+
+
+.Dates {
+
+}
+
+.TimeStudiedContainer {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.Times {
+
+}
+
+.DateContainer > :first-child,
+.TimeStudiedContainer > :first-child {
+    border-bottom: 1px solid black;
+}

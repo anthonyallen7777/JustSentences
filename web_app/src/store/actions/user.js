@@ -53,3 +53,37 @@ export const deleteAccount = () => {
         dispatch(deleteAccountSuccess());
     };
 };
+
+export const fetchUserProgressStart = () => {
+    return {
+        type: actionTypes.FETCH_USER_PROGRESS_START
+    };
+};
+
+export const fetchUserProgressSuccess = (userData) => {
+    return {
+        type: actionTypes.FETCH_USER_PROGRESS_SUCCESS,
+        userData: userData
+    };
+};
+
+export const fetchUserProgressFail = err => {
+    return {
+        type: actionTypes.FETCH_USER_PROGRESS_FAIL,
+        error: err
+    };
+};
+
+export const fetchUserProgress = (idToken) => {
+    return dispatch => {
+        dispatch(fetchUserProgressStart())
+        const queryParams = '?auth=' + idToken;
+        axios.get( 'https://jstsentences-default-rtdb.firebaseio.com/user1/.json' + queryParams)
+        .then(res => {
+            dispatch(fetchUserProgressSuccess(res.data));
+        })
+        .catch(err =>
+            dispatch(fetchUserProgressFail(err.response.data.error))
+        );
+    };
+};

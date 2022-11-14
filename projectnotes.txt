@@ -35,6 +35,12 @@ base this off of changeSuccess or authSuccess
 add the ability to send another verification email
 and remove banner when verified
 
+change signup/signin page css to include the blue color somehow
+
+fix loading bar background color
+
+add a error handling modal
+
 css now
 landing page - done
 sign in - done
