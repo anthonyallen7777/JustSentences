@@ -1,6 +1,8 @@
 import React from "react";
 import classes from './Languages.module.css';
 
+import BackButton from "../../UI/Buttons/BackButton/BackButton";
+
 const Languages = (props) => {
     const changePreferredLanguage = () => {
         console.log("CHANGED");
@@ -8,6 +10,7 @@ const Languages = (props) => {
 
     return (
         <div className={classes.Container}>
+            <BackButton />
             <div className={classes.TitleContainer}>
                 <h2>Languages</h2>
             </div>

@@ -9,7 +9,9 @@ const BackButton = (props) => {
     }
 
     return (
-        <button className={classes.BackButton} onClick={goBack}></button>
+        <div className={classes.ArrowContainer}  onClick={goBack}>
+                <i className={[classes.Arrow, classes.Left].join(' ')}></i>
+        </div>
     );
 };
 

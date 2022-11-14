@@ -67,8 +67,8 @@ const Practice = (props) => {
 
     return (
         <div className={classes.PracticeContainer}>
+            <BackButton/>
             <div className={classes.PracticeHeader}>
-                <BackButton className={classes.Button} />
                 <h2 className={classes.Title}>Practice</h2>
             </div>
             <PracticeMode loading={loading}

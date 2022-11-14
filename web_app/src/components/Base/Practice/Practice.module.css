@@ -13,8 +13,6 @@
     align-items: center;
 }
 
-.Button {
-}
-
 .Title {
+    border-bottom: 2px solid black;
 }

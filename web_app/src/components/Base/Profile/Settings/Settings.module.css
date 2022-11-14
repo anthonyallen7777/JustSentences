@@ -1,0 +1,39 @@
+.Container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.TitleContainer {
+    height: 10%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid black;
+    background-color: rgb(166, 240, 240);
+}
+
+.MainSettingsContainer {
+    height: 90%;
+    width: 100%;
+    display: flex;
+}
+
+.MainSettingsContainer button {
+    height: 10%;
+    width: 100%;
+    margin: 25px 25px 0 25px;
+    background-color: #e9e9ed;
+    color: grey;
+    border-radius: 5px;
+    border: 1px solid rgb(212, 212, 212);
+    font-size: 1.2rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

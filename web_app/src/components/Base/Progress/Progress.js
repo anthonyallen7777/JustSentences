@@ -1,6 +1,8 @@
 import React, { useEffect} from "react";
 import classes from './Progress.module.css';
 
+import BackButton from "../../UI/Buttons/BackButton/BackButton";
+
 //redux
 import { connect } from "react-redux";
 import * as actions from '../../../store/actions/index';
@@ -42,6 +44,7 @@ const Progress = (props) => {
 
         content = (
             <div className={classes.ProgressContainer}>
+                <BackButton />
                 <div className={classes.TitleContainer}>
                     <h2>Progress</h2>
                 </div>

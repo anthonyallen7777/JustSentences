@@ -14,13 +14,13 @@ const Settings = (props) => {
 
     const [dataToDisplay, setDataToDisplay] = useState(null);
     return (
-        <div>
+        <div className={classes.Container}>
             <BackButton />
             <Modal showModal={showModal} dataToDisplay={dataToDisplay}></Modal>
-            <div>
+            <div className={classes.TitleContainer}>
                 <h2>Settings</h2>
             </div>
-            <div>
+            <div className={classes.MainSettingsContainer}>
                 <button onClick={() => buttonPress('username')}>Change username</button>
                 <button onClick={() => buttonPress('email')}>Change Email</button>
                 <button onClick={() => buttonPress('progress')}>Reset Progress</button>
