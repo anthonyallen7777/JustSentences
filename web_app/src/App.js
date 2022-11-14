@@ -22,7 +22,6 @@ const App = props => {
   useEffect(() => {
       onAutoSignIn();
       setLoading(false);
-      // console.log("[App componentDidMount]");
   }, [onAutoSignIn]);
 
   let content = null;

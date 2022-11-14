@@ -116,7 +116,7 @@ export const authenticate = (
                         localStorage.setItem('localId', resData.localId);
                         localStorage.setItem('expireDate', expireDate);
                         
-                        console.log(resData.refreshToken);
+                        // console.log(resData.refreshToken);
                         dispatch(authTimeoutCheck(resData.expiresIn));
                         dispatch(authSuccess(resData.idToken,
                                         resData.localId,
@@ -233,7 +233,7 @@ export const changeUsernameOrEmail = (whatAreWeChanging, newUsernameOrEmail) => 
         setTimeout(() => {
             let dataToChange = null;
             if (whatAreWeChanging === 'email') {dataToChange = whatAreWeChanging} else {dataToChange = 'displayName'}
-            console.log(typeof dataToChange, typeof newUsernameOrEmail)
+            // console.log(typeof dataToChange, typeof newUsernameOrEmail)
             //change the user's username
             const url = 'https://identitytoolkit.googleapis.com/v1/accounts:update?key=' + APT_CvkWER;
             axios.post(url,
@@ -244,7 +244,7 @@ export const changeUsernameOrEmail = (whatAreWeChanging, newUsernameOrEmail) => 
                 }
             )
             .then(updatedAccRes => {
-                console.log(updatedAccRes);
+                // console.log(updatedAccRes);
                 localStorage.setItem('idToken', updatedAccRes.data.idToken);
                 localStorage.setItem('refreshToken', updatedAccRes.data.refreshToken);
                 localStorage.setItem('displayName', updatedAccRes.data.displayName);

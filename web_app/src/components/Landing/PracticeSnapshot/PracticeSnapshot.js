@@ -4,9 +4,9 @@ import classes from './PracticeSnapshot.module.css';
 const PracticeSnapshot = (props) => {
     const progressHandler = (knowOrDont) => {
         if (knowOrDont) {
-            console.log("GOOD JOB");
+            // console.log("GOOD JOB");
         } else {
-            console.log("NICE TRY KEEP PRACTICING");
+            // console.log("NICE TRY KEEP PRACTICING");
         }
     }
 

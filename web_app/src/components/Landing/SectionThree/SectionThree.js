@@ -19,7 +19,7 @@ const SectionThree = (props) => {
     }, []);
 
     const changeLanguageHandler = (directionOrLanguage) => {
-        console.log(directionOrLanguage);
+        // console.log(directionOrLanguage);
     }
 
     let snapshotContent = <p>Loading...</p>;
