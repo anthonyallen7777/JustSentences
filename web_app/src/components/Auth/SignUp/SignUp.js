@@ -6,7 +6,6 @@ import * as actions from '../../../store/actions/index';
 import { connect } from "react-redux";
 
 const SignUp = (props) => {
-    const ref = useRef(null);
     const [enteredUsername, setUsername] = useState('Enter a username');
     const [clickedUsername, setClickedUsername] = useState(false);
     const [enteredEmail, setEmail] = useState('Enter your email');
@@ -21,8 +20,6 @@ const SignUp = (props) => {
     const [passwordConfirmType, setPasswordConfirmType] = useState("text");
     const [lastInputValue, setLastInputValue] = useState(null);
     const [lastInputType, setLastInputType] = useState(null);
-
-    const { onClickOutside } = props;
 
     const clickAwayHandler = useCallback((setState) => {
         if (lastInputValue !== null) {
@@ -52,6 +49,9 @@ const SignUp = (props) => {
             }
         }
     }, [lastInputValue, lastInputType]);
+
+    const { onClickOutside } = props;
+    const ref = useRef(null);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -102,7 +102,7 @@ const SignUp = (props) => {
         content = (
             <div className={classes.LandingSignUp}>
                 <p>Sign Up</p>
-                <form onSubmit={submitHandler}  ref={ref}>
+                <form onSubmit={submitHandler} ref={ref}>
                     <div className={classes.FormControl}>
                         <input type="text" id="username" value={enteredUsername}
                         onChange={event => setEnteredValue(event, setUsername, 'username')}

@@ -54,6 +54,9 @@ profile -
 settings -
 
 color schemes
+main background color
+#ddddff
+
 banner/titles
 rgb(166, 240, 240);
 

@@ -1,15 +1,40 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import classes from './SettingsModal.module.css';
 
 //redux
 import { connect } from "react-redux";
 import * as actions from '../../../../../store/actions/index';
 
-const Modal = (props) => {
-    const [enteredUsername, setUsername] = useState('Username');
+const SettingsModal = (props) => {
+    const [enteredUsername, setUsername] = useState('new username');
     const [enteredEmail, setEmail] = useState('Email');
     const [enteredPassword, setPassword] = useState('');
     const {onChangeUsernameOrEmail, onResetProgress, onDeleteAccount} = props;
+
+    const { onClickOutside } = props;
+    const ref = useRef(null);
+
+    const {showModal, setShowModal} = props;
+
+    const clickAwayHandler = useCallback(() => {
+        console.log("CLICKED OFF OF MODAL");
+        setShowModal(!showModal);
+    }, [showModal, setShowModal]);
+
+    useEffect(() => {
+        if (showModal) {
+            const handleClickOutside = (event) => {
+                if (ref.current && !ref.current.contains(event.target)) {
+                    onClickOutside && onClickOutside();
+                    clickAwayHandler();
+                }
+                };
+                document.addEventListener('click', handleClickOutside, true);
+                return () => {
+                document.removeEventListener('click', handleClickOutside, true);
+            };
+        }
+    }, [showModal, onClickOutside,clickAwayHandler]);
 
     const submitHandler = event => {
         event.preventDefault();
@@ -30,8 +55,10 @@ const Modal = (props) => {
     const formFormatHandler = (toChange) => {
         if (toChange === 'username') {
             return (
-            <div>
-                <p>Change username</p>
+            <div className={classes.FormContainer}>
+                <div className={classes.TitleContainer}>
+                    <p>CHANGE USERNAME</p>
+                </div>
                 <form onSubmit={submitHandler}>
                     <div className={classes.FormControl}>
                         <label htmlFor="username">Enter a new username</label>
@@ -39,7 +66,7 @@ const Modal = (props) => {
                         onChange={event => setEnteredValue(event, setUsername)} />
                     </div>
                     <div className={classes.FormActions}>
-                        <button type="submit">change your username</button>
+                        <button type="submit">Submit</button>
                     </div>
                 </form>
             </div>
@@ -47,8 +74,10 @@ const Modal = (props) => {
         }
         if (toChange === 'email') {
             return (
-                <div>
-                    <p>Change email</p>
+                <div className={classes.FormContainer}>
+                    <div className={classes.TitleContainer}>
+                        <p>CHANGE EMAIL</p>
+                    </div>
                     <form onSubmit={submitHandler}>
                         <div className={classes.FormControl}>
                             <label htmlFor="email">Enter your new email</label>
@@ -56,7 +85,7 @@ const Modal = (props) => {
                             onChange={event => setEnteredValue(event, setEmail)} />
                         </div>
                         <div className={classes.FormActions}>
-                            <button type="submit">change your email</button>
+                            <button type="submit">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -65,7 +94,7 @@ const Modal = (props) => {
         else {
             if (toChange === 'progress') {
                 return (
-                    <div>
+                    <div className={classes.FormContainer}>
                         <p>Are you sure you want to reset your progress?</p>
                         <p>THIS PROCESS CANNOT BE UNDONE!</p>
                         <button onClick={submitHandler}>Yes reset all progress</button>
@@ -73,7 +102,7 @@ const Modal = (props) => {
                     );
             } else {
                 return (
-                    <div>
+                    <div className={classes.FormContainer}>
                         <p>Are you sure you want to delete your account?</p>
                         <p>THIS PROCESS CANNOT BE UNDONE!</p>
                         <button onClick={submitHandler}>Yes please DELETE my account</button>
@@ -91,10 +120,10 @@ const Modal = (props) => {
     }
 
     return (
-        <div className={classes.Modal}
+        <div className={classes.Modal} ref={ref}
         style={{
-            transform: props.showModal ? 'translateY(0)' : 'translateY(-100vh)',
-            opacity: props.showModal ? '1': '0'
+            transform: showModal ? 'translateY(0)' : 'translateY(-100vh)',
+            opacity: showModal ? '1': '0'
         }}>
             {modalContent}
         </div>
@@ -109,4 +138,4 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(null, mapDispatchToProps)(Modal);
+export default connect(null, mapDispatchToProps)(SettingsModal);
