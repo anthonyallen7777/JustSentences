@@ -1,4 +1,5 @@
 import React from "react";
+import classes from './Profile.module.css';
 import { useNavigate } from "react-router";
 import BackButton from "../../UI/Buttons/BackButton/BackButton";
 import LogoutButton from "../../UI/Buttons/LogoutButton/LogoutButton";
@@ -13,15 +14,19 @@ const Profile = (props) => {
         navigate('/profile/settings');
     }
     return (
-        <div>
+        <div className={classes.Container}>
             <BackButton />
-            <div>
+            <div className={classes.TitleContainer}>
                 <h2>Profile</h2>
                 <button onClick={goToSetting}>Settings</button>
             </div>
-            <div>
-                <p>{displayName}</p>
-                <LogoutButton />
+            <div className={classes.ProfileMainContainer}>
+                <div className={classes.UsernameSignOut}>
+                    <div className={classes.UsernameContainer}>
+                        <p>username: {displayName}</p>
+                    </div>
+                    <LogoutButton />
+                </div>
             </div>
         </div>
     );

@@ -1,0 +1,89 @@
+.Container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.TitleContainer {
+    height: 10%;
+    width: 100%;
+    display: grid;
+    align-items: center;
+    align-content: center;
+    border-bottom: 2px solid black;
+    background-color: rgb(166, 240, 240);
+}
+
+.TitleContainer > * {
+    grid-column-start: 1;
+    grid-row-start: 1;
+    justify-self: center;
+}
+
+.TitleContainer > *:last-child {
+    justify-self: right;
+}
+
+.TitleContainer button {
+    background-color: #e9e9ed;
+    color: grey;
+    border-radius: 5px;
+    border: 1px solid rgb(212, 212, 212);
+    margin: 0 5px;
+    width: 10%;
+    height: 80%;
+    font-size: 1.5rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ProfileMainContainer {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.UsernameSignOut {
+    background-color: #fdfdeb;
+    border-radius: 25px;
+    height: 90%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.UsernameContainer {
+    background-color: #f0f0ce;
+    margin-top: 5%;
+    font-size: 1.5rem;
+    border-radius: 15px;
+}
+
+.UsernameSignOut p {
+    margin: 5px 10px;
+}
+
+.UsernameSignOut button {
+    background-color: #e9e9ed;
+    color: grey;
+    border-radius: 5px;
+    border: 1px solid rgb(212, 212, 212);
+    margin: 0 5px;
+    width: 20%;
+    height: 8%;
+    font-size: 1.8rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5%;
+}

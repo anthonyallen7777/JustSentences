@@ -44,12 +44,17 @@ add a error handling modal
 css now
 landing page - done
 sign in - done
-base - 
-practice -
-progress -
-languages -
+base - done
+practice - done
+progress - done
+languages - done
 profile -
 settings -
+
+color schemes
+div container
+#fdfdeb
+div container bubble
 
 background-color fade in and out through sections
 
