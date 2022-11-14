@@ -32,9 +32,13 @@ if the user changes username or email sign them out
 also diplay text saying we are logging you out
 base this off of changeSuccess or authSuccess
 
+add the ability to send another verification email
+and remove banner when verified
+
 css now
 landing page - done
-sign in -
+sign in - done
+base - 
 practice -
 progress -
 languages -

@@ -40,18 +40,16 @@
 }
 
 .Button:hover {
-    background-color: #cdccd3;
     cursor: pointer;
 }
 
 .Button:active {
-    background-color: azure;
 }
 
 .FormContainer {
     height: 60%;
     width: 80%;
-    background-color: beige;
+    background-color: #f0f0ce;
     border-radius: 25px;
 }
 

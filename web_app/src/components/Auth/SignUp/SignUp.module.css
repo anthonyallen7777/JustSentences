@@ -102,8 +102,3 @@
     height: 50px;
     font-size: 25px;
 }
-
-.SignUp .FormActions button:active {
-    color: red;
-    background-color: red;
-}

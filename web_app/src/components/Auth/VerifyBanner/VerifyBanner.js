@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import classes from './VerifyBanner.module.css';
 
 //redux
 import { connect } from "react-redux";
@@ -32,7 +33,7 @@ const VerifyBanner = (props) => {
     }
 
     return (
-        <div>
+        <div className={classes.Banner}>
             {banner}
         </div>
     );

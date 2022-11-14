@@ -1,0 +1,33 @@
+.Base {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.RouteContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.Route {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40%;
+    font-size: 4rem;
+    border-bottom: 2px solid black;
+}
+
+.Route a {
+    text-decoration: none;
+}
+
+.Route a:hover {
+    text-decoration: underline;
+}
+
+.Route a:active {
+    color: rgb(166, 240, 240);
+}
