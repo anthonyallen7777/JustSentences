@@ -3,10 +3,29 @@ import Languages from "../Languages/Languages";
 import PracticeSnapshot from "../PracticeSnapshot/PracticeSnapshot";
 import classes from './SectionThree.module.css';
 
+import DefaultButton from '../../UI/Buttons/DefaultButton/DefaultButton';
+import CSSTransition from 'react-transition-group/CSSTransition';
+
+//hooks
+import { useWindowScrollPositions } from "../../../hooks/scroll-hook";
+
+const practiceModeTiming = {
+    enter: 400,
+    exit: 1000
+};
+
+
 const SectionThree = (props) => {
+    const { scrollX, scrollY } = useWindowScrollPositions();
+
     const [loading, setLoading] = useState(true);
-    const [languages, setLanguages] = useState(["eng", "ja", "fr"])
-    const [activeLanguage, setActiveLanguage] = useState("eng")
+    const [languages, setLanguages] = useState(["fr","us","jp","ru","kw","kg"]);
+    const [tempLanguages, setTempLanguages] = useState([
+        ["fr","us","jp","ru","kw","kg"],
+        ["fr","aw","at","az","bs","bb"],
+        ["kn","lc","re","rw","ph","pr"]
+    ]);
+    const [activeLanguage, setActiveLanguage] = useState("fr");
     const [sentence, setSentence] = useState({"夕食を作りましょうか": "Shall we cook dinner"});
     const [tempSentences, setTempSentences] = useState([
         {"夕食を作りましょうか": "Shall we cook dinner"},
@@ -19,35 +38,40 @@ const SectionThree = (props) => {
     }, []);
 
     const changeLanguageHandler = (directionOrLanguage) => {
-        // console.log(directionOrLanguage);
+        if (activeLanguage !== directionOrLanguage) {
+            console.log(activeLanguage);
+            setActiveLanguage(directionOrLanguage);
+        }
     }
 
+    let content = null;
     let snapshotContent = <p>Loading...</p>;
     if (!loading) {
-        snapshotContent = (
-            <PracticeSnapshot currentSentence={sentence} practiceMode={true} />
-        );
-    }
+        if (sentence) {
+            snapshotContent = (
+                <PracticeSnapshot currentSentence={sentence} practiceMode={true} />
+            );
+        }
 
-    return (
-        <div className={classes.SectionThreeContainer}>
-            <div className={classes.TitleContainer}>
+        console.log(scrollY);
+        content = <div className={classes.SectionThreeContainer}>
+        <div className={classes.TitleContainer}>
                 <h2>Try It Out</h2>
             </div>
-            <div className={classes.LanguagesContainer}>
-                <div className={classes.ArrowContainer} onClick={()=> changeLanguageHandler('left')}>
-                    <i className={[classes.Arrow, classes.Left].join(' ')}></i>
+                <div className={classes.LanguagesContainer}>
+                    <DefaultButton direction={"Left"} />
+                    <Languages langClass="Stretch"
+                    languages={languages}
+                    clicked={changeLanguageHandler} />
+                    <DefaultButton direction={"Right"} />
                 </div>
-                <Languages langClass="Stretch" clicked={changeLanguageHandler} />
-                <div className={classes.ArrowContainer} onClick={()=> changeLanguageHandler('right')}>
-                    <i className={[classes.Arrow, classes.Right].join(' ')}></i>
-                </div>
-            </div>
             <div className={[classes.Box, classes.SnapshotContainer].join(' ')}>
                 {snapshotContent}
             </div>
         </div>
-    );
+    }
+
+    return content;
 };
 
 export default SectionThree;

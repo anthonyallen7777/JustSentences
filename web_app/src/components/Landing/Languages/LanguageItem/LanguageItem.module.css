@@ -1,8 +1,6 @@
 .Box {
-    background-color: rgb(240, 240, 206);
     height: 25%;
     width: 25%;
-    border-radius: 25px;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -11,8 +9,9 @@
 }
 
 .Box span {
-    height: 80%;
-    width: 80%;
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
 }
 
 .Stretch {

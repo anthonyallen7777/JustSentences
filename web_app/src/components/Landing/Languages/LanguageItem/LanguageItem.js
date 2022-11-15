@@ -2,9 +2,10 @@ import React from "react";
 import classes from './LanguageItem.module.css';
 
 const LanguageItem = (props) => {
+    let lang = "fi fi-"+props.language;
     return (
-        <div className={classes[props.langClass]} onClick={()=> props.clicked('Finland')}>
-            <span className="fi fi-gr"></span>
+        <div className={classes[props.langClass]} onClick={()=> props.clicked(props.language)}>
+            <span className={lang}></span>
         </div>
     );
 };

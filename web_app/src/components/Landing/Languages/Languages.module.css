@@ -2,13 +2,20 @@
     background-color: #fdfdeb;
     height: 400px;
     width: 500px;
+    border-radius: 5px;
+    margin-left: 2rem;
+    align-self: center;
+    box-shadow: 5px 5px 2px black;
+    border: 1px solid black;
+}
+
+.Container {
+    height: 100%;
+    width: 100%;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
     align-items: center;
-    border-radius: 25px;
-    margin-left: 2rem;
-    align-self: center;
 }
 
 .Stretch {

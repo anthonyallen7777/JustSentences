@@ -97,31 +97,31 @@ const SectionOne = () => {
         );
     }
     // console.log(scrollX, scrollY);
-    let testBool = false;
+    let playAnimation = false;
     if (scrollY < 300) {
-        testBool = true;
+        playAnimation = true;
     } else {
-        testBool = false;
+        playAnimation = false;
     }
     return (
         <div className={classes.SectionOneContainer}>
             <div className={[classes.Box, classes.TextContainer].join(' ')}>
                 <CSSTransition
-                    in={testBool}
+                    in={playAnimation}
                     timeout={sectionOneTextTiming}
                     classNames={'fade-firstText'}
                     >
                         <p className={classes.PracticeText}>Practice</p>
                 </CSSTransition>
                 <CSSTransition
-                    in={testBool}
+                    in={playAnimation}
                     timeout={sectionOneTextTiming}
                     classNames={'fade-secondText'}
                     >
                         <p className={classes.PracticeText}>With</p>
                 </CSSTransition>
                 <CSSTransition
-                    in={testBool}
+                    in={playAnimation}
                     timeout={sectionOneTextTiming}
                     classNames={'fade-lastText'}
                     >

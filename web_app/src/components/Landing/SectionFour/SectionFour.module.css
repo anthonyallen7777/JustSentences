@@ -44,5 +44,7 @@
     align-items: center;
     text-align: center;
     background-color: rgb(253, 253, 235);
-    border-radius: 25px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 2px black;
+    border: 1px solid black;
 }
