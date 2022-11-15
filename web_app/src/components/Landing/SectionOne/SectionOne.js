@@ -1,8 +1,6 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import PracticeSnapshot from "../PracticeSnapshot/PracticeSnapshot";
 import classes from './SectionOne.module.css';
-
-let currIndex = -1;
 
 const SectionOne = () => {
     const [loading, setLoading] = useState(true);
@@ -14,48 +12,62 @@ const SectionOne = () => {
     ]);
 
     const snapshotChangeHandler = (clickDirection) => {
-        displaySentenceHandler(clickDirection);
+        testFunc(clickDirection);
     }
 
-    const displaySentenceHandler = useCallback((clicked) => {
-        
+    const [currIndex, setCurrIndex] = useState(-1);
+    const testFunc = (clicked) => {
         if (clicked) {
             if (clicked === 'left') {
-                --currIndex;
-                if (currIndex < 0) {
-                    currIndex = tempSentences.length-1;
-                }
-                setSentence(tempSentences[currIndex]);
+                setCurrIndex(prevCount => prevCount - 1);
+                setCurrIndex(prevCount => {
+                    if (prevCount < 0) {
+                        setSentence(tempSentences[prevCount]);
+                        return tempSentences.length-1;
+                    }
+                });
             } else {
-                ++currIndex;
-                if (currIndex >= tempSentences.length) {
-                    currIndex = 0;
-                }
-                setSentence(tempSentences[currIndex]);
+                setCurrIndex(prevCount => prevCount + 1);
+                setCurrIndex(prevCount => {
+                    if (prevCount >= tempSentences.length) {
+                        setSentence(tempSentences[0]);
+                        return 0;
+                    } else {
+                        setSentence(tempSentences[prevCount]);
+                        return prevCount;
+                    }
+                });
             }
         } else {
-            ++currIndex;
-            if (currIndex >= tempSentences.length) {
-                currIndex = 0;
-            }
-            setSentence(tempSentences[currIndex]);
+            setCurrIndex(prevCount => prevCount + 1);
+            setCurrIndex(prevCount => {
+                if (prevCount >= tempSentences.length) {
+                    setSentence(tempSentences[0]);
+                    return 0;
+                } else {
+                    setSentence(tempSentences[prevCount]);
+                    return prevCount;
+                }
+            });
         }
-    }, [tempSentences]);
+    }
 
     useEffect(() => {
         setLoading(false);
-        displaySentenceHandler();
-        const interval = setInterval(() => {
-            displaySentenceHandler();
-        }, 3000);
-        return () => clearInterval(interval);
-    }, [displaySentenceHandler]);
+        testFunc();
+        const intervalId = setInterval(() => {
+            testFunc();
+        }, 1000);
+        return () => clearInterval(intervalId);
+    }, []);
+
+    console.log(currIndex);
 
 
     let snapshotContent = <p>Loading...</p>;
     if (!loading) {
         snapshotContent = (
-            <PracticeSnapshot currentSentence={sentence} clicked={snapshotChangeHandler} practiceMode={false} />
+            <PracticeSnapshot currentSentence={sentence} currIndex={currIndex} clicked={snapshotChangeHandler} practiceMode={false} />
         );
     }
     return (

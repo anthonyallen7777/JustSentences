@@ -17,6 +17,10 @@
     border-bottom: 2px solid black;
 }
 
+.TitleContainer h2 {
+    border-bottom: 2px solid black;
+}
+
 .DateAndTimeStudiedContainer {
     height: 90%;
     width: 100%;

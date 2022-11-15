@@ -50,8 +50,8 @@ base - done
 practice - done
 progress - done
 languages - done
-profile -
-settings -
+profile - done
+settings - done
 
 color schemes
 main background color
@@ -63,6 +63,7 @@ rgb(166, 240, 240);
 buttons
 rgb(212, 212, 212);
 
+default button css
 	background-color: #e9e9ed;
     color: grey;
     border-radius: 5px;

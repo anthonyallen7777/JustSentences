@@ -1,14 +1,24 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import classes from './SettingsModal.module.css';
+
 
 //redux
 import { connect } from "react-redux";
 import * as actions from '../../../../../store/actions/index';
 
+//css
+import classes from './SettingsModal.module.css';
+import './modalAnimations.css';
+import CSSTransition from 'react-transition-group/CSSTransition';
+
+const modalTiming = {
+    enter: 400,
+    exit: 1000
+};
+
 const SettingsModal = (props) => {
     const [enteredUsername, setUsername] = useState('new username');
     const [enteredEmail, setEmail] = useState('Email');
-    const [enteredPassword, setPassword] = useState('');
+    // const [enteredPassword, setPassword] = useState('');
     const {onChangeUsernameOrEmail, onResetProgress, onDeleteAccount} = props;
 
     const { onClickOutside } = props;
@@ -120,13 +130,17 @@ const SettingsModal = (props) => {
     }
 
     return (
-        <div className={classes.Modal} ref={ref}
-        style={{
-            transform: showModal ? 'translateY(0)' : 'translateY(-100vh)',
-            opacity: showModal ? '1': '0'
-        }}>
-            {modalContent}
-        </div>
+        <CSSTransition
+        mountOnEnter
+        unmountOnExit
+        in={showModal}
+        timeout={modalTiming}
+        classNames={'fade-slide'}
+        >
+            <div className={classes.Modal} ref={ref}>
+                {modalContent}
+            </div>
+        </CSSTransition>
     );
 };
 

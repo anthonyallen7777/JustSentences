@@ -22,7 +22,7 @@
     display: inline-block;
     margin: 15px 0;
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     height: 35px;
     border-radius: 25px;
     margin-left: 25px;

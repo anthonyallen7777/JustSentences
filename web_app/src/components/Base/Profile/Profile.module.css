@@ -17,6 +17,10 @@
     background-color: rgb(166, 240, 240);
 }
 
+.TitleContainer h2 {
+    border-bottom: 2px solid black;
+}
+
 .TitleContainer > * {
     grid-column-start: 1;
     grid-row-start: 1;

@@ -17,6 +17,10 @@
     border-bottom: 2px solid black;
 }
 
+.TitleContainer h2 {
+    border-bottom: 2px solid black;
+}
+
 .LanguageMainContainer {
     height: 100%;
     width: 100%;

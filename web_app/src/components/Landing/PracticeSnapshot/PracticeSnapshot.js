@@ -1,7 +1,14 @@
 import React, { useEffect } from "react";
+
+//css
 import classes from './PracticeSnapshot.module.css';
+import CSSTransition from 'react-transition-group/CSSTransition';
 
 const PracticeSnapshot = (props) => {
+    useEffect(() => {
+        console.log('[PracticeSnapshot ComponentDidMount]');
+    }, []);
+
     const progressHandler = (knowOrDont) => {
         if (knowOrDont) {
             // console.log("GOOD JOB");
