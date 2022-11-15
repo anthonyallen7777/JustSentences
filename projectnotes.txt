@@ -53,6 +53,19 @@ languages - done
 profile - done
 settings - done
 
+animations - done
+
+- choose two base languages to STICK TO through project
+- spanish, japanese
+- have a base database design and STICK WITH IT
+- complete practice mode ability to actually practice
+- make it so it updates onto the database
+- make it so we can fetch the user data in progress
+- make sure all setting features work
+- make sure we can fetch the users languages from the server
+- and the ability to change the preferred language
+- make sure responsive css to mobile
+
 color schemes
 main background color
 #ddddff

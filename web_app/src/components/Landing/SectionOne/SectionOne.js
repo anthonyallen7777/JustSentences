@@ -9,12 +9,16 @@ import './SectionOneAnimations.css';
 //hooks
 import { useWindowScrollPositions } from "../../../hooks/scroll-hook";
 
+//redux
+import { connect } from "react-redux";
+import * as actions from '../../../store/actions/index';
+
 const sectionOneTextTiming = {
     enter: 400,
     exit: 5000
 };
 
-const SectionOne = () => {
+const SectionOne = (props) => {
     const { scrollX, scrollY } = useWindowScrollPositions();
 
     const [loading, setLoading] = useState(true);
@@ -70,7 +74,12 @@ const SectionOne = () => {
     }, [tempSentences]);
 
     const [showText, setShowText] = useState(true);
+
+    const {onFetchAvailableLanguages} = props;
     useEffect(() => {
+        //onmount fetch available languages
+        onFetchAvailableLanguages();
+
         //Practice text animation display and animate
         setLoading(false);
         testFunc();
@@ -135,4 +144,16 @@ const SectionOne = () => {
     );
 };
 
-export default SectionOne;
+const mapStateToProps = state => {
+    return {
+        fetchedAvailableLanguages: state.global.fetchedLanguages
+    };
+  }
+  
+  const mapDispatchToProps = dispatch => {
+    return {
+      onFetchAvailableLanguages: () => dispatch(actions.globalFetchLanguages())
+    };
+  };
+
+export default connect(mapStateToProps, mapDispatchToProps)(SectionOne);

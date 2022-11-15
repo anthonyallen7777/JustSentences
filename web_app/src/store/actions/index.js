@@ -16,3 +16,7 @@ export {
     deleteAccount,
     fetchUserProgress
 } from './user';
+
+export {
+    globalFetchLanguages
+} from './global';

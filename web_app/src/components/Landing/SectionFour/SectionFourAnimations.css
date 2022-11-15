@@ -16,7 +16,7 @@
 
 @keyframes comeInSectionFourFirstText {
     0% {
-        transform: translateX(80%);
+        transform: translateX(-500%);
     }
     100% {
         transform: translateX(0%);
@@ -28,13 +28,13 @@
         transform: translateX(0%);
     }
     100% {
-        transform: translateX(80%);
+        transform: translateX(-500%);
     }
 }
 
 @keyframes comeInSectionFourSecondText {
     0% {
-        transform: translateX(90%);
+        transform: translateX(-500%);
     }
     100% {
         transform: translateX(0%);
@@ -46,6 +46,6 @@
         transform: translateX(0%);
     }
     100% {
-        transform: translateX(90%);
+        transform: translateX(-500%);
     }
 }
