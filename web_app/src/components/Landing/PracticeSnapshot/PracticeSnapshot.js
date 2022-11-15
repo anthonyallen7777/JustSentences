@@ -1,12 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 //css
 import classes from './PracticeSnapshot.module.css';
 import CSSTransition from 'react-transition-group/CSSTransition';
 
+const textTiming = {
+    enter: 400,
+    exit: 1000
+};
+
 const PracticeSnapshot = (props) => {
     useEffect(() => {
-        console.log('[PracticeSnapshot ComponentDidMount]');
+        // console.log('[PracticeSnapshot ComponentDidMount]');
     }, []);
 
     const progressHandler = (knowOrDont) => {
@@ -51,10 +56,22 @@ const PracticeSnapshot = (props) => {
             </div>
             <div className={classes.TextContainer}>
                 <div className={classes.PracticeText}>
+                    <CSSTransition
+                    in={props.showText}
+                    timeout={textTiming}
+                    classNames={'fade-snapshot'}
+                    >
                     <p>{practiceText}</p>
+                    </CSSTransition>
                 </div>
                 <div className={classes.TranslatedText}>
+                    <CSSTransition
+                    in={props.showText}
+                    timeout={textTiming}
+                    classNames={'fade-snapshot'}
+                    >
                     <p>{translatedText}</p>
+                    </CSSTransition>
                 </div>
             </div>
             <div className={classes.ArrowContainer} onClick={()=>props.clicked('right')}>
