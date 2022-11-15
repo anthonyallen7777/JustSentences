@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
+
 import Languages from "../Languages/Languages";
 import PracticeSnapshot from "../PracticeSnapshot/PracticeSnapshot";
-import classes from './SectionThree.module.css';
-
 import DefaultButton from '../../UI/Buttons/DefaultButton/DefaultButton';
+
+//CSS
+import classes from './SectionThree.module.css';
 import CSSTransition from 'react-transition-group/CSSTransition';
+import './SectionThreeAnimations.css';
 
 //hooks
 import { useWindowScrollPositions } from "../../../hooks/scroll-hook";
 
 const practiceModeTiming = {
     enter: 400,
-    exit: 1000
+    exit: 5000
 };
 
 
@@ -39,7 +42,7 @@ const SectionThree = (props) => {
 
     const changeLanguageHandler = (directionOrLanguage) => {
         if (activeLanguage !== directionOrLanguage) {
-            console.log(activeLanguage);
+            // console.log(activeLanguage);
             setActiveLanguage(directionOrLanguage);
         }
     }
@@ -52,12 +55,22 @@ const SectionThree = (props) => {
                 <PracticeSnapshot currentSentence={sentence} practiceMode={true} />
             );
         }
-
-        console.log(scrollY);
+        let showContent = false;
+        if (scrollY < 1000) {
+            showContent = true;
+        } else {
+            showContent = false;
+        }
+        
         content = <div className={classes.SectionThreeContainer}>
         <div className={classes.TitleContainer}>
                 <h2>Try It Out</h2>
             </div>
+            <CSSTransition
+            in={showContent}
+            timeout={practiceModeTiming}
+            classNames={'fade-sectionThreeContainer'}
+            >
                 <div className={classes.LanguagesContainer}>
                     <DefaultButton direction={"Left"} />
                     <Languages langClass="Stretch"
@@ -65,9 +78,16 @@ const SectionThree = (props) => {
                     clicked={changeLanguageHandler} />
                     <DefaultButton direction={"Right"} />
                 </div>
-            <div className={[classes.Box, classes.SnapshotContainer].join(' ')}>
+            </CSSTransition>
+            <CSSTransition
+            in={showContent}
+            timeout={practiceModeTiming}
+            classNames={'fade-sectionThreeContainer'}
+            >
+                <div className={[classes.Box, classes.SnapshotContainer].join(' ')}>
                 {snapshotContent}
             </div>
+            </CSSTransition>
         </div>
     }
 

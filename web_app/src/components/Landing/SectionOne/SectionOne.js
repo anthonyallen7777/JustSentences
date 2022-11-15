@@ -15,7 +15,7 @@ const sectionOneTextTiming = {
 };
 
 const SectionOne = () => {
-    const { scrollX, scrollY } = useWindowScrollPositions()
+    const { scrollX, scrollY } = useWindowScrollPositions();
 
     const [loading, setLoading] = useState(true);
     const [sentence, setSentence] = useState('');

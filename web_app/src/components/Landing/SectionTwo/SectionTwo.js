@@ -14,6 +14,11 @@ const sectionTwoTextTiming = {
     exit: 5000
 };
 
+const sectionTwoTextContainerTiming = {
+    enter: 400,
+    exit: 5000
+};
+
 const SectionTwo = (props) => {
     const { scrollX, scrollY } = useWindowScrollPositions();
     
@@ -67,26 +72,39 @@ const SectionTwo = (props) => {
         playAnimation = false;
     }
 
+    let playAnimationContainer = false;
+    if (scrollY < 200) {
+        playAnimationContainer = true;
+    } else {
+        playAnimationContainer = false;
+    }
+
     return (
         <div className={classes.SectionTwoContainer}>
             <Languages langClass="Box" languages={languages}
             showLanguages={showLanguages} />
-            <div className={classes.TextContainer}>
-                <CSSTransition
-                    in={playAnimation}
-                    timeout={sectionTwoTextTiming}
-                    classNames={'fade-sectionTwoFirstText'}
-                    >
-                        <p className={classes.Text}>Available</p>
-                </CSSTransition>
-                <CSSTransition
-                    in={playAnimation}
-                    timeout={sectionTwoTextTiming}
-                    classNames={'fade-sectionTwoSecondText'}
-                    >
-                        <p className={classes.Text}>Languages</p>
-                </CSSTransition>
-            </div>
+            <CSSTransition
+                in={playAnimationContainer}
+                timeout={sectionTwoTextContainerTiming}
+                classNames={'fade-sectionTwoTextContainer'}
+                >
+                <div className={classes.TextContainer}>
+                    <CSSTransition
+                        in={playAnimation}
+                        timeout={sectionTwoTextTiming}
+                        classNames={'fade-sectionTwoFirstText'}
+                        >
+                            <p className={classes.Text}>Available</p>
+                    </CSSTransition>
+                    <CSSTransition
+                        in={playAnimation}
+                        timeout={sectionTwoTextTiming}
+                        classNames={'fade-sectionTwoSecondText'}
+                        >
+                            <p className={classes.Text}>Languages</p>
+                    </CSSTransition>
+                </div>
+            </CSSTransition>
         </div>
     );
 };

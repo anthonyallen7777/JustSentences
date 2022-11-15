@@ -14,9 +14,6 @@ const sectionTwoLanguagesTiming = {
 
 const Languages = props => {
     const [loading, setLoading] = useState(false);
-    useEffect(() => {
-        console.log("[Languages ComponentDidMount]");
-    } ,[]);
 
     let content = <p>Loading...</p>;
 

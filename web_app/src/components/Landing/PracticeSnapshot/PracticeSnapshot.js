@@ -10,9 +10,6 @@ const textTiming = {
 };
 
 const PracticeSnapshot = (props) => {
-    useEffect(() => {
-        // console.log('[PracticeSnapshot ComponentDidMount]');
-    }, []);
 
     const progressHandler = (knowOrDont) => {
         if (knowOrDont) {

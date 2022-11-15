@@ -1,0 +1,51 @@
+.fade-sectionFourFirstText-enter-active {
+    animation: comeInSectionFourFirstText 0.4s ease-out forwards;
+}
+
+.fade-sectionFourFirstText-exit-active {
+    animation: goOutSectionFourFirstText 0.3s ease-out forwards;
+}
+
+.fade-sectionFourSecondText-enter-active {
+    animation: comeInSectionFourSecondText 0.4s ease-out forwards;
+}
+
+.fade-sectionFourSecondText-exit-active {
+    animation: goOutSectionFourSecondText 0.3s ease-out forwards;
+}
+
+@keyframes comeInSectionFourFirstText {
+    0% {
+        transform: translateX(80%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes goOutSectionFourFirstText {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(80%);
+    }
+}
+
+@keyframes comeInSectionFourSecondText {
+    0% {
+        transform: translateX(90%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes goOutSectionFourSecondText {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(90%);
+    }
+}
