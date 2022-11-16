@@ -18,5 +18,5 @@ export {
 } from './user';
 
 export {
-    globalFetchLanguages
+    globalFetch
 } from './global';

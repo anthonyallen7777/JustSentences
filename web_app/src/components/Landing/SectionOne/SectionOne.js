@@ -9,10 +9,6 @@ import './SectionOneAnimations.css';
 //hooks
 import { useWindowScrollPositions } from "../../../hooks/scroll-hook";
 
-//redux
-import { connect } from "react-redux";
-import * as actions from '../../../store/actions/index';
-
 const sectionOneTextTiming = {
     enter: 400,
     exit: 5000
@@ -20,14 +16,10 @@ const sectionOneTextTiming = {
 
 const SectionOne = (props) => {
     const { scrollX, scrollY } = useWindowScrollPositions();
-
+    const {sampleSentences} = props;
     const [loading, setLoading] = useState(true);
+    const [showText, setShowText] = useState(true);
     const [sentence, setSentence] = useState('');
-    const [tempSentences, setTempSentences] = useState([
-        {"夕食を作りましょうか": "Shall we cook dinner"},
-        {"親友は何人いる？": "How many best friends do you have?"},
-        {"行くまいと決めた。": "I decided not to go."},
-    ]);
 
     const snapshotChangeHandler = (clickDirection) => {
         testFunc(clickDirection);
@@ -40,21 +32,21 @@ const SectionOne = (props) => {
                 setCurrIndex(prevCount => prevCount - 1);
                 setCurrIndex(prevCount => {
                 if (prevCount < 0) {
-                    setSentence(tempSentences[tempSentences.length-1]);
-                    return tempSentences.length-1;
+                    setSentence(sampleSentences[sampleSentences.jaSentences.length-1]);
+                    return sampleSentences.length-1;
                 } else {
-                    setSentence(tempSentences[prevCount]);
+                    setSentence(sampleSentences[prevCount]);
                     return prevCount;
                 }
             });
             } else {
                 setCurrIndex(prevCount => prevCount + 1);
-            setCurrIndex(prevCount => {
-                if (prevCount >= tempSentences.length) {
-                    setSentence(tempSentences[0]);
+                setCurrIndex(prevCount => {
+                if (prevCount >= sampleSentences.jaSentences.length) {
+                    setSentence(sampleSentences.jaSentences[0]);
                     return 0;
                 } else {
-                    setSentence(tempSentences[prevCount]);
+                    setSentence(sampleSentences.jaSentences[prevCount]);
                     return prevCount;
                 }
             });
@@ -62,26 +54,21 @@ const SectionOne = (props) => {
         } else {
             setCurrIndex(prevCount => prevCount + 1);
             setCurrIndex(prevCount => {
-                if (prevCount >= tempSentences.length) {
-                    setSentence(tempSentences[0]);
+                if (prevCount >= sampleSentences.jaSentences.length) {
+                    setSentence(sampleSentences.jaSentences[0]);
                     return 0;
                 } else {
-                    setSentence(tempSentences[prevCount]);
+                    setSentence(sampleSentences.jaSentences[prevCount]);
                     return prevCount;
                 }
             });
         }
-    }, [tempSentences]);
+    }, [sampleSentences]);
 
-    const [showText, setShowText] = useState(true);
-
-    const {onFetchAvailableLanguages} = props;
     useEffect(() => {
-        //onmount fetch available languages
-        onFetchAvailableLanguages();
-
-        //Practice text animation display and animate
+        console.log(sampleSentences);
         setLoading(false);
+        //Practice text animation display and animate
         testFunc();
         setTimeout(() => {
             setShowText(false);
@@ -105,7 +92,6 @@ const SectionOne = (props) => {
             clicked={snapshotChangeHandler} practiceMode={false} />
         );
     }
-    // console.log(scrollX, scrollY);
     let playAnimation = false;
     if (scrollY < 300) {
         playAnimation = true;
@@ -144,16 +130,4 @@ const SectionOne = (props) => {
     );
 };
 
-const mapStateToProps = state => {
-    return {
-        fetchedAvailableLanguages: state.global.fetchedLanguages
-    };
-  }
-  
-  const mapDispatchToProps = dispatch => {
-    return {
-      onFetchAvailableLanguages: () => dispatch(actions.globalFetchLanguages())
-    };
-  };
-
-export default connect(mapStateToProps, mapDispatchToProps)(SectionOne);
+export default (SectionOne);

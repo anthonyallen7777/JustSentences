@@ -20,76 +20,137 @@ const practiceModeTiming = {
 
 const SectionThree = (props) => {
     const { scrollX, scrollY } = useWindowScrollPositions();
-
-    const [loading, setLoading] = useState(true);
-    const [languages, setLanguages] = useState(["fr","us","jp","ru","kw","kg"]);
-    const [tempLanguages, setTempLanguages] = useState([
-        ["fr","us","jp","ru","kw","kg"],
-        ["fr","aw","at","az","bs","bb"],
-        ["kn","lc","re","rw","ph","pr"]
-    ]);
-    const [activeLanguage, setActiveLanguage] = useState("fr");
-    const [sentence, setSentence] = useState({"夕食を作りましょうか": "Shall we cook dinner"});
-    const [tempSentences, setTempSentences] = useState([
-        {"夕食を作りましょうか": "Shall we cook dinner"},
-        {"親友は何人いる？": "How many best friends do you have?"},
-        {"行くまいと決めた。": "I decided not to go."},
-    ]);
-
-    useEffect(() => {
-        setLoading(false);
-    }, []);
+    
+    const [numberOfAttempts, setNumberOfAttempts] = useState(0);
+    const [sentenceIndex, setSentenceIndex] = useState(0);
+    const [languages, setLanguages] = useState(["jp","es"]);
+    const [activeLanguage, setActiveLanguage] = useState("jp");
+    const [tempSentences, setTempSentences] = useState({
+		"esSentences": [
+			{
+				"beunos dias": "Good morning."
+			},
+			{
+				"how was dinner?": "como estuvo la cena?"
+			},
+			{
+				"Tome el bus": "I took the bus."
+			}
+		],
+		"jaSentences": [
+			{
+				"夕食を作りましょうか": "Shall we cook dinner"
+			},
+			{
+				"親友は何人いる？": "How many best friends do you have?"
+			},
+			{
+				"行くまいと決めた。": "I decided not to go."
+			}
+		]
+	});
 
     const changeLanguageHandler = (directionOrLanguage) => {
         if (activeLanguage !== directionOrLanguage) {
-            // console.log(activeLanguage);
+            console.log(directionOrLanguage);
             setActiveLanguage(directionOrLanguage);
+        }
+    }
+
+    const changeSentenceHandler = (knowOrDont) => {
+        //they knew it
+        if (knowOrDont) {
+            setSentenceIndex(prevCount => prevCount + 1);
+            setSentenceIndex(prevCount => {
+                //fix this to work with any array length
+                if (prevCount >= tempSentences.jaSentences.length) {
+                    return 0;
+                } else {
+                    return prevCount;
+                }
+            });
+            setNumberOfAttempts(0);
+        }
+        //didnt know it
+        else {
+            if (numberOfAttempts > 5) {
+                console.log("TOO MANY TRIES");
+                setSentenceIndex(prevCount => prevCount + 1);
+                setSentenceIndex(prevCount => {
+                    if (prevCount >= tempSentences.jaSentences.length) {
+                        return 0;
+                    } else {
+                        return prevCount;
+                    }
+                });
+                setNumberOfAttempts(0);
+            } else {
+                setNumberOfAttempts(prevCount => prevCount+1);
+            }
         }
     }
 
     let content = null;
     let snapshotContent = <p>Loading...</p>;
-    if (!loading) {
-        if (sentence) {
-            snapshotContent = (
-                <PracticeSnapshot currentSentence={sentence} practiceMode={true} />
-            );
+
+    if (tempSentences) {
+        switch(activeLanguage) {
+            case 'jp': {
+                snapshotContent = (
+                    <PracticeSnapshot
+                    currentSentence={tempSentences.jaSentences[sentenceIndex]}
+                    practiceMode={true}
+                    clicked={changeSentenceHandler} />
+                );
+                break;
+            }
+            case 'es' : {
+                snapshotContent = (
+                    <PracticeSnapshot
+                    currentSentence={tempSentences.esSentences[sentenceIndex]}
+                    practiceMode={true}
+                    clicked={changeSentenceHandler} />
+                );
+                break;
+            }
+            default:
+                break;
         }
-        let showContent = false;
-        if (scrollY < 1000) {
-            showContent = true;
-        } else {
-            showContent = false;
-        }
-        
-        content = <div className={classes.SectionThreeContainer}>
-        <div className={classes.TitleContainer}>
-                <h2>Try It Out</h2>
-            </div>
-            <CSSTransition
-            in={showContent}
-            timeout={practiceModeTiming}
-            classNames={'fade-sectionThreeContainer'}
-            >
-                <div className={classes.LanguagesContainer}>
-                    <DefaultButton direction={"Left"} />
-                    <Languages langClass="Stretch"
-                    languages={languages}
-                    clicked={changeLanguageHandler} />
-                    <DefaultButton direction={"Right"} />
-                </div>
-            </CSSTransition>
-            <CSSTransition
-            in={showContent}
-            timeout={practiceModeTiming}
-            classNames={'fade-sectionThreeContainer'}
-            >
-                <div className={[classes.Box, classes.SnapshotContainer].join(' ')}>
-                {snapshotContent}
-            </div>
-            </CSSTransition>
-        </div>
     }
+    let showContent = false;
+    if (scrollY < 1000) {
+        showContent = true;
+    } else {
+        showContent = false;
+    }
+    
+    content = <div className={classes.SectionThreeContainer}>
+    <div className={classes.TitleContainer}>
+            <h2>Try It Out</h2>
+        </div>
+        <CSSTransition
+        in={showContent}
+        timeout={practiceModeTiming}
+        classNames={'fade-sectionThreeContainer'}
+        >
+            <div className={classes.LanguagesContainer}>
+                <DefaultButton direction={"Left"} />
+                <Languages langClass="Stretch"
+                languages={languages}
+                clicked={changeLanguageHandler} />
+                <DefaultButton direction={"Right"} />
+            </div>
+        </CSSTransition>
+        <CSSTransition
+        in={showContent}
+        timeout={practiceModeTiming}
+        classNames={'fade-sectionThreeContainer'}
+        >
+            <div className={[classes.Box, classes.SnapshotContainer].join(' ')}>
+            {snapshotContent}
+        </div>
+        </CSSTransition>
+    </div>
 
     return content;
 };

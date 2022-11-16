@@ -4,19 +4,17 @@ import React, { useEffect, useState } from "react";
 import classes from './PracticeSnapshot.module.css';
 import CSSTransition from 'react-transition-group/CSSTransition';
 
+import Incorrect from "../../UI/Practice/Incorrect/Incorrect";
+import Correct from '../../UI/Practice/Correct/Correct';
+
 const textTiming = {
     enter: 400,
     exit: 1000
 };
 
 const PracticeSnapshot = (props) => {
-
     const progressHandler = (knowOrDont) => {
-        if (knowOrDont) {
-            // console.log("GOOD JOB");
-        } else {
-            // console.log("NICE TRY KEEP PRACTICING");
-        }
+        props.clicked(knowOrDont);
     }
 
     let practiceText = null;
@@ -31,6 +29,8 @@ const PracticeSnapshot = (props) => {
     if (props.practiceMode) {
         content = (
             <React.Fragment>
+                <Incorrect />
+                <Correct />
                 <div className={classes.TextContainer}>
                     <div className={classes.PracticeText}>
                         <p>{practiceText}</p>

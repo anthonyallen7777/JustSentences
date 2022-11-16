@@ -13,15 +13,22 @@ const sectionTwoLanguagesTiming = {
 }
 
 const Languages = props => {
-    const [loading, setLoading] = useState(false);
-
     let content = <p>Loading...</p>;
+
+    // const languages = Object.keys(props.languages)
+    // .map(objKey => {
+    //     return (
+    //         <LanguageItem langClass={props.langClass}
+    //         language={props.languages[objKey]}
+    //         clicked={props.clicked} />
+    //     );
+    // });
 
     if (props.languages) {
         content = (
         <div className={classes[props.langClass]}>
             <CSSTransition
-                in={props.showLanguages}
+                in={false/*props.showLanguages*/}
                 timeout={sectionTwoLanguagesTiming}
                 classNames={'fade-sectionTwoLanguages'}
                 >
@@ -31,18 +38,6 @@ const Languages = props => {
                         clicked={props.clicked} />
                         <LanguageItem langClass={props.langClass}
                         language={props.languages[1]}
-                        clicked={props.clicked} />
-                        <LanguageItem langClass={props.langClass}
-                        language={props.languages[2]}
-                        clicked={props.clicked} />
-                        <LanguageItem langClass={props.langClass}
-                        language={props.languages[3]}
-                        clicked={props.clicked} />
-                        <LanguageItem langClass={props.langClass}
-                        language={props.languages[4]}
-                        clicked={props.clicked} />
-                        <LanguageItem langClass={props.langClass}
-                        language={props.languages[5]}
                         clicked={props.clicked} />
                     </div>
             </CSSTransition>

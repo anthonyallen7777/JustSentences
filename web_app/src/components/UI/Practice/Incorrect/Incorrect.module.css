@@ -1,0 +1,13 @@
+.Container {
+    height: 5rem;
+    width: 5rem;
+    background-color: red;
+    position: fixed;
+    bottom: 50vh;
+    z-index: 501;
+    text-align: center;
+}
+
+.Text {
+    font-size: 2rem;
+}

@@ -21,13 +21,8 @@ const sectionTwoTextContainerTiming = {
 
 const SectionTwo = (props) => {
     const { scrollX, scrollY } = useWindowScrollPositions();
-    
+    const {fetchedLanguages} = props;
     const [languages, setLanguages] = useState(null);
-    const [tempLanguages, setTempLanguages] = useState([
-        ["fr","us","jp","ru","kw","kg"],
-        ["fr","aw","at","az","bs","bb"],
-        ["kn","lc","re","rw","ph","pr"]
-    ]);
 
     const clickLanguageHandler = (languageClicked) => {
         changeLanguages(languageClicked);
@@ -37,15 +32,15 @@ const SectionTwo = (props) => {
     const changeLanguages = useCallback((languageClicked) => {
         setCurrIndex(prevCount => prevCount + 1);
         setCurrIndex(prevCount => {
-            if (prevCount >= tempLanguages.length) {
-                setLanguages(tempLanguages[0]);
+            if (prevCount >= fetchedLanguages.length) {
+                setLanguages(fetchedLanguages[0]);
                 return 0;
             } else {
-                setLanguages(tempLanguages[prevCount]);
+                setLanguages(fetchedLanguages[prevCount]);
                 return prevCount;
             }
         });
-    }, [tempLanguages]);
+    }, [fetchedLanguages]);
 
     const [showLanguages, setShowLanguages] = useState(true);
     useEffect(() => {

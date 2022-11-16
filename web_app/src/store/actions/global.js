@@ -1,36 +1,37 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
 
-export const globalFetchLanguagesStart = () => {
+export const globalFetchStart = () => {
     return {
-        type: actionTypes.GLOBAL_FETCH_LANGUAGES_START
+        type: actionTypes.GLOBAL_FETCH__START
     };
 };
 
-export const globalFetchLanguagesSuccess = (fetchedLanguages) => {
+export const globalFetchSuccess = (fetchedLanguages, sampleSentences) => {
     return {
-        type: actionTypes.GLOBAL_FETCH_LANGUAGES_SUCCESS,
-        fetchedLanguages: fetchedLanguages
+        type: actionTypes.GLOBAL_FETCH__SUCCESS,
+        fetchedLanguages: fetchedLanguages,
+        sampleSentences: sampleSentences
     };
 };
 
-export const globalFetchLanguagesFail = err => {
+export const globalFetchFail = err => {
     return {
-        type: actionTypes.GLOBAL_FETCH_LANGUAGES_FAIL,
+        type: actionTypes.GLOBAL_FETCH__FAIL,
         error: err
     };
 };
 
-export const globalFetchLanguages = () => {
+export const globalFetch = () => {
     return dispatch => {
-        dispatch(globalFetchLanguagesStart());
-        axios.get( 'https://jstsentences-default-rtdb.firebaseio.com/availableLanguages/.json')
+        dispatch(globalFetchStart());
+        axios.get( 'https://jstsentences-default-rtdb.firebaseio.com/global.json?')
         .then(res => {
-            console.log(res.data);
-            dispatch(globalFetchLanguagesSuccess(res.data));
+            // console.log(res.data);
+            dispatch(globalFetchSuccess(res.data.availableLanguages, res.data.sampleSentences));
         })
         .catch(err =>
-            dispatch(globalFetchLanguagesFail(err.response.data.error))
+            dispatch(globalFetchFail(err.response.data.error))
         );
     };
 };
