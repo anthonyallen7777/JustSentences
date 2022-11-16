@@ -5,7 +5,6 @@ import BackButton from "../../UI/Buttons/BackButton/BackButton";
 
 const Languages = (props) => {
     const changePreferredLanguage = () => {
-        // console.log("CHANGED");
     }
 
     return (

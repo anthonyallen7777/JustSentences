@@ -25,7 +25,7 @@ const VerifyBanner = (props) => {
             banner = (
             <React.Fragment>
                     <p>Please check your email to verify your account!</p>
-                    <p>If you don't verify your account by Dec 21st</p>
+                    <p>If you don't verify your account by [EmailVerification Deadline Date]</p>
                     <p>it will be deleted!</p>
             </React.Fragment>
             );

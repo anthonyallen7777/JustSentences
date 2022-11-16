@@ -6,7 +6,7 @@ import CSSTransition from 'react-transition-group/CSSTransition';
 
 import Incorrect from "../../UI/Practice/Incorrect/Incorrect";
 import Correct from '../../UI/Practice/Correct/Correct';
-import './ProgressNumberAnimations.css';
+import '../../../sharedcss/ProgressNumberAnimations.css';
 
 const textTiming = {
     enter: 400,

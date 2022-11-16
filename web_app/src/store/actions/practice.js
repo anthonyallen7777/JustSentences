@@ -1,7 +1,6 @@
 import * as actionTypes from './actionTypes';
 // import axios from '../../axios/axios-auth';
 import axios from 'axios';
-const APT_CvkWER = 'AIzaSyALRbqgd_UHIFY788iVXPZ0XwQ8uKI_y2w';
 
 export const fetchStart = () => {
     return {
@@ -26,11 +25,9 @@ export const fetchFail = err => {
 export const fetchSentences = (idToken) => {
     return dispatch => {
         dispatch(fetchStart())
-
         const queryParams = '?auth=' + idToken;
-        axios.get( 'https://jstsentences-default-rtdb.firebaseio.com/testData/.json' + queryParams)
+        axios.get( 'https://jstsentences-default-rtdb.firebaseio.com/jaSentences.json' + queryParams)
         .then(res => {
-            // console.log(res.data);
             dispatch(fetchSuccess(res.data));
         })
         .catch(err =>

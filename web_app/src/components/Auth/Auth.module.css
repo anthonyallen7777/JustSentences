@@ -27,7 +27,7 @@
 
 .Button {
     background-color: #e9e9ed;
-    color: grey;
+    color: black;
     border-radius: 5px;
     border: 1px solid rgb(212, 212, 212);
     margin: 0 5px;
@@ -55,15 +55,16 @@
 }
 
 .SignInActive > :first-child {
-    background-color: #adacb6;
-    
+    background-color: #717079;
+    border: inset;
 }
 .SignInActive > :first-child:hover {
     background-color: #cdccd3;
 }
 
 .SignUpActive > :last-child {
-    background-color: #adacb6;
+    background-color: #717079;
+    border: inset;
 }
 
 .SignUpActive > :last-child:hover {

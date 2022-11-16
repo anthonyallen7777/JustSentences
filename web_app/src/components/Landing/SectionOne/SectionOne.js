@@ -66,7 +66,6 @@ const SectionOne = (props) => {
     }, [sampleSentences]);
 
     useEffect(() => {
-        console.log(sampleSentences);
         setLoading(false);
         //Practice text animation display and animate
         testFunc();

@@ -11,7 +11,6 @@ const Progress = (props) => {
     const {loading, fetchedUserData, onFetchUserProgress} = props;
 
     useEffect(() => {
-        console.log('[Progress ComponentDidMount]');
         onFetchUserProgress(localStorage.getItem("idToken"));
     }, [onFetchUserProgress]);
 

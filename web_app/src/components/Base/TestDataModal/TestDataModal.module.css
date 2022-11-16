@@ -1,0 +1,21 @@
+.TestDataBanner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left:-250px;
+    margin-top:-250px;
+    z-index: 500;
+    background-color: #fdfdeb;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px black;
+    width:500px;
+    height:250px;
+    box-shadow: auto;
+    transition: all 0.3s ease-out;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+}

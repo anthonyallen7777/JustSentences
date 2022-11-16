@@ -21,7 +21,7 @@ const SignUp = (props) => {
     const [lastInputValue, setLastInputValue] = useState(null);
     const [lastInputType, setLastInputType] = useState(null);
 
-    const clickAwayHandler = useCallback((setState) => {
+    const clickAwayHandler = useCallback(() => {
         if (lastInputValue !== null) {
             if (lastInputValue === '') {
                 switch(lastInputType) {
@@ -64,7 +64,7 @@ const SignUp = (props) => {
         return () => {
         document.removeEventListener('click', handleClickOutside, true);
         };
-    }, [ onClickOutside,clickAwayHandler]);
+    }, [onClickOutside, clickAwayHandler]);
 
     const submitHandler = event => {
         event.preventDefault();

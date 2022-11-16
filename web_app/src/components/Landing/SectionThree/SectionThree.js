@@ -72,7 +72,6 @@ const SectionThree = (props) => {
         //didnt know it
         else {
             if (numberOfAttempts > 5) {
-                console.log("TOO MANY TRIES");
                 setSentenceIndex(prevCount => prevCount + 1);
                 setSentenceIndex(prevCount => {
                     if (prevCount >= tempSentences.jaSentences.length) {

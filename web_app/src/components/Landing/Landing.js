@@ -12,7 +12,6 @@ import * as actions from '../../store/actions/index';
 const Landing = (props) => {
     const {loading, onGlobalFetch, sampleSentences, fetchedLanguages} = props;
     useEffect(() => {
-        console.log("[Landing ComponentDidMount]");
         onGlobalFetch();
     }, [onGlobalFetch]);
 

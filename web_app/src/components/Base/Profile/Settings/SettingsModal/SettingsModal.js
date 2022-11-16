@@ -18,7 +18,6 @@ const modalTiming = {
 const SettingsModal = (props) => {
     const [enteredUsername, setUsername] = useState('new username');
     const [enteredEmail, setEmail] = useState('Email');
-    // const [enteredPassword, setPassword] = useState('');
     const {onChangeUsernameOrEmail, onResetProgress, onDeleteAccount} = props;
 
     const { onClickOutside } = props;
@@ -27,7 +26,6 @@ const SettingsModal = (props) => {
     const {showModal, setShowModal} = props;
 
     const clickAwayHandler = useCallback(() => {
-        console.log("CLICKED OFF OF MODAL");
         setShowModal(!showModal);
     }, [showModal, setShowModal]);
 

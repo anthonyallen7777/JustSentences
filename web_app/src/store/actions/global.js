@@ -27,7 +27,6 @@ export const globalFetch = () => {
         dispatch(globalFetchStart());
         axios.get( 'https://jstsentences-default-rtdb.firebaseio.com/global.json?')
         .then(res => {
-            // console.log(res.data);
             dispatch(globalFetchSuccess(res.data.availableLanguages, res.data.sampleSentences));
         })
         .catch(err =>

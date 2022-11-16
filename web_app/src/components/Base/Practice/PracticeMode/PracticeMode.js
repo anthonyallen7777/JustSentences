@@ -2,23 +2,21 @@ import React, { useEffect, useState } from "react";
 import classes from './PracticeMode.module.css';
 
 const PracticeMode = (props) => {
+    const {sentenceIndex, fetchedSentences, progressHandler} = props;
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        setLoading(false);
+    }, []);
 
     let content = <p>Loading...</p>;
-    const currIndex = Math.floor(Math.random() * 3);
-    if (!props.loading) {
-        if (props.fetchedSentences) {
-            // console.log(props.fetchedSentences);
-            let preferredLanguage = 'ja';
-            let sentences = props.fetchedSentences[preferredLanguage];
-            // console.log(sentences[currIndex]);
-            let randomSentence = sentences[currIndex];
-            let practiceSentence = <h2>{Object.keys(randomSentence)[0]}</h2>
-            let translatedSentence = <h2>{randomSentence[Object.keys(randomSentence)[0]]}</h2>
-            // let transformedSentence = sentences.map(sentence => {
-            //     console.log(sentence);
-            //     return null;
-            // });
 
+
+    if (!loading) {
+        if (fetchedSentences) {
+            let sentences = fetchedSentences[sentenceIndex];
+                    let practiceSentence = <h2>{Object.keys(sentences)[0]}</h2>
+                    let translatedSentence = <h2>{sentences[Object.keys(sentences)[0]]}</h2>
+        
             content = (
                 <React.Fragment>
                     <div className={classes.PracticeContainer}>
@@ -29,16 +27,18 @@ const PracticeMode = (props) => {
                             {translatedSentence}
                         </div>
                         <div className={classes.ProgressButtonContainer}>
-                            <button onClick={() => props.progressHandler(true, currIndex)}
+                            <button onClick={() => progressHandler(true, sentenceIndex)}
                             className={classes.ProgressButton}>I know this</button>
-                            <button onClick={() => props.progressHandler(false, currIndex)}
+                            <button onClick={() => progressHandler(false, sentenceIndex)}
                             className={classes.ProgressButton}>I don't know this</button>
                         </div>
                     </div>
                 </React.Fragment>
             );
         }
+
     }
+
 
     return content;
 };
