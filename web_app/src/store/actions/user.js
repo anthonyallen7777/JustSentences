@@ -1,6 +1,4 @@
 import * as actionTypes from './actionTypes';
-import axios from 'axios';
-const APT_CvkWER = 'AIzaSyALRbqgd_UHIFY788iVXPZ0XwQ8uKI_y2w';
 
 export const resetProgressStart = () => {
     return {
@@ -77,13 +75,15 @@ export const fetchUserProgressFail = err => {
 export const fetchUserProgress = (idToken) => {
     return dispatch => {
         dispatch(fetchUserProgressStart())
-        const queryParams = '?auth=' + idToken;
-        axios.get( 'https://jstsentences-default-rtdb.firebaseio.com/user1/.json' + queryParams)
-        .then(res => {
-            dispatch(fetchUserProgressSuccess(res.data));
-        })
-        .catch(err =>
-            dispatch(fetchUserProgressFail(err.response.data.error))
-        );
+        dispatch(fetchUserProgressSuccess())
+        dispatch(fetchUserProgressFail())
+        // const queryParams = '?auth=' + idToken;
+        // axios.get( 'https://jstsentences-default-rtdb.firebaseio.com/user1/.json' + queryParams)
+        // .then(res => {
+        //     dispatch(fetchUserProgressSuccess(res.data));
+        // })
+        // .catch(err =>
+        //     dispatch(fetchUserProgressFail(err.response.data.error))
+        // );
     };
 };

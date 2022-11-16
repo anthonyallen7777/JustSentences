@@ -20,13 +20,13 @@ const sectionTwoTextContainerTiming = {
 };
 
 const SectionTwo = (props) => {
-    const { scrollX, scrollY } = useWindowScrollPositions();
+    const { scrollY } = useWindowScrollPositions();
     const {fetchedLanguages} = props;
     const [languages, setLanguages] = useState(null);
 
-    const clickLanguageHandler = (languageClicked) => {
-        changeLanguages(languageClicked);
-    }
+    // const clickLanguageHandler = (languageClicked) => {
+    //     changeLanguages(languageClicked);
+    // }
 
     const [currIndex, setCurrIndex] = useState(-1);
     const changeLanguages = useCallback((languageClicked) => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import Languages from "../Languages/Languages";
 import PracticeSnapshot from "../PracticeSnapshot/PracticeSnapshot";
@@ -18,7 +18,7 @@ const practiceModeTiming = {
 
 
 const SectionThree = (props) => {
-    const { scrollX, scrollY } = useWindowScrollPositions();
+    const { scrollY } = useWindowScrollPositions();
     
     const [numberOfAttempts, setNumberOfAttempts] = useState(0);
     const [sentenceIndex, setSentenceIndex] = useState(0);

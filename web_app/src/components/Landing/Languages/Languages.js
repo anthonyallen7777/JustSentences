@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "../../../../node_modules/flag-icons/css/flag-icons.min.css";
 
 //CSS

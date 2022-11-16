@@ -3,10 +3,7 @@ import classes from './Languages.module.css';
 
 import BackButton from "../../UI/Buttons/BackButton/BackButton";
 
-const Languages = (props) => {
-    const changePreferredLanguage = () => {
-    }
-
+const Languages = () => {
     return (
         <div className={classes.Container}>
             <BackButton />
