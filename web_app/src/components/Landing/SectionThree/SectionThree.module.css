@@ -18,6 +18,8 @@
     align-items: center;
     width: 50%;
     margin-bottom: 25px;
+    box-shadow: 5px 5px 2px black;
+    border: 1px solid black;
 }
 
 .ArrowContainer {

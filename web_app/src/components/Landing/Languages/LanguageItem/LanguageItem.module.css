@@ -24,7 +24,7 @@
     box-shadow: 0 5px 5px -2px black;
 }
 .Stretch:active {
-    background-color: red;
+    background-color: #f0f0ce;
 }
 
 .Stretch span {

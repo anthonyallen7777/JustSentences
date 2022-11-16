@@ -4,7 +4,7 @@ import classes from './Correct.module.css';
 const Incorrect = (props) => {
     return (
         <div className={classes.Container}>
-            <p>+</p>
+            <p className={classes.Text}>+1</p>
         </div>
     );
 };

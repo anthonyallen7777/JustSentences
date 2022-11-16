@@ -1,3 +1,12 @@
+.Container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
 .Box {
     background-color: #fdfdeb;
     height: 400px;
@@ -7,15 +16,6 @@
     align-self: center;
     box-shadow: 5px 5px 2px black;
     border: 1px solid black;
-}
-
-.Container {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    align-items: center;
 }
 
 .Stretch {

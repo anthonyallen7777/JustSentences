@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 //css
 import classes from './PracticeSnapshot.module.css';
@@ -6,16 +6,33 @@ import CSSTransition from 'react-transition-group/CSSTransition';
 
 import Incorrect from "../../UI/Practice/Incorrect/Incorrect";
 import Correct from '../../UI/Practice/Correct/Correct';
+import './ProgressNumberAnimations.css';
 
 const textTiming = {
     enter: 400,
-    exit: 1000
+    exit: 400
+};
+
+const progressNumberTiming = {
+    enter: 400,
+    exit: 400
 };
 
 const PracticeSnapshot = (props) => {
+    const [showProgressNumberGood, setShowProgressNumberGood] = useState(false);
+    const [showProgressNumberBad, setShowProgressNumberBad] = useState(false);
     const progressHandler = (knowOrDont) => {
         props.clicked(knowOrDont);
-    }
+        if (knowOrDont) {
+            setShowProgressNumberGood(true);
+        } else {
+            setShowProgressNumberBad(true);
+        }
+        setTimeout(() => {
+            setShowProgressNumberGood(false);
+            setShowProgressNumberBad(false);
+        }, 400);
+    };
 
     let practiceText = null;
     let translatedText = null;
@@ -29,8 +46,24 @@ const PracticeSnapshot = (props) => {
     if (props.practiceMode) {
         content = (
             <React.Fragment>
-                <Incorrect />
-                <Correct />
+                <CSSTransition
+                mountOnEnter
+                unmountOnExit
+                in={showProgressNumberGood}
+                timeout={progressNumberTiming}
+                classNames={'fade-progressNumbers'}
+                >
+                    <Correct />
+                </CSSTransition>
+                <CSSTransition
+                mountOnEnter
+                unmountOnExit
+                in={showProgressNumberBad}
+                timeout={progressNumberTiming}
+                classNames={'fade-progressNumbers'}
+                >
+                    <Incorrect />
+                </CSSTransition>
                 <div className={classes.TextContainer}>
                     <div className={classes.PracticeText}>
                         <p>{practiceText}</p>
@@ -48,7 +81,7 @@ const PracticeSnapshot = (props) => {
     } else {
         content = (
             <React.Fragment>
-            <div className={classes.ArrowContainer} onClick={()=>props.clicked('left')}>
+            <div className={classes.ArrowContainer} onClick={()=>props.clickedLang('left')}>
                 <i className={[classes.Arrow, classes.Left].join(' ')}></i>
             </div>
             <div className={classes.TextContainer}>
@@ -71,7 +104,7 @@ const PracticeSnapshot = (props) => {
                     </CSSTransition>
                 </div>
             </div>
-            <div className={classes.ArrowContainer} onClick={()=>props.clicked('right')}>
+            <div className={classes.ArrowContainer} onClick={()=>props.clickedLang('right')}>
                 <i className={[classes.Arrow, classes.Right].join(' ')}></i>
             </div>
         </React.Fragment>

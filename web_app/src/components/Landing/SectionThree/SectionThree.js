@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 
 import Languages from "../Languages/Languages";
 import PracticeSnapshot from "../PracticeSnapshot/PracticeSnapshot";
-import DefaultButton from '../../UI/Buttons/DefaultButton/DefaultButton';
 
 //CSS
 import classes from './SectionThree.module.css';
@@ -52,11 +51,10 @@ const SectionThree = (props) => {
 
     const changeLanguageHandler = (directionOrLanguage) => {
         if (activeLanguage !== directionOrLanguage) {
-            console.log(directionOrLanguage);
             setActiveLanguage(directionOrLanguage);
         }
     }
-
+    
     const changeSentenceHandler = (knowOrDont) => {
         //they knew it
         if (knowOrDont) {
@@ -109,7 +107,7 @@ const SectionThree = (props) => {
                     <PracticeSnapshot
                     currentSentence={tempSentences.esSentences[sentenceIndex]}
                     practiceMode={true}
-                    clicked={changeSentenceHandler} />
+                    clicked={changeSentenceHandler}/>
                 );
                 break;
             }
@@ -134,11 +132,9 @@ const SectionThree = (props) => {
         classNames={'fade-sectionThreeContainer'}
         >
             <div className={classes.LanguagesContainer}>
-                <DefaultButton direction={"Left"} />
                 <Languages langClass="Stretch"
                 languages={languages}
                 clicked={changeLanguageHandler} />
-                <DefaultButton direction={"Right"} />
             </div>
         </CSSTransition>
         <CSSTransition

@@ -1,13 +1,19 @@
 .Container {
-    height: 5rem;
-    width: 5rem;
+    height: 50px;
+    width: 40px;
     background-color: red;
+    box-shadow: 1px 1px 1px black;
     position: fixed;
-    bottom: 50vh;
-    z-index: 501;
+    top: 25%;
+    z-index: 600;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25%;
 }
 
 .Text {
+    color: white;
     font-size: 2rem;
 }
